@@ -1,4 +1,4 @@
-# 🎛️ 本仓库是我整理收集的一些 **VirtualDJ Device Pack**
+# 本仓库是我整理收集的一些 **VirtualDJ Device Pack**
 
 ## 📦 安装说明
 
