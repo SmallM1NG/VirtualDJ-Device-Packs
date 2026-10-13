@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device brand="Denon DJ" name="DNPRIME4RW" author="Atomix Productions" category="0" groupdevice="DNPRIME4" waitForDevice="DNPRIME4" waitfordevicedelay="1000" description="Prime 4 Right Display" version="800" devicetype="display" threadModeOutput="yes" assignment="right" type="MIDI" vid="0x15E4" pid="0xB007" decks="1" >
+	
+	<!-- No need to send 
+	<init sendsysex="F07E000601F7" />-->
+	
+	<!-- Enable Image Decoding -->
+	<preinit sendsysex="F000020B3008100000F7" />
+	<sysexin sysexid="F000020B3008100000F7" name="LCD_READY" waitFor="yes"/>
+	
+
+	<!-- Set Display Brightness -->
+	<text sysex="F000020B30087C000100F7">
+		<digit name="LCD_BRIGHTNESS" offset="9" nbbits="7"  />
+	</text>
+	
+
+	<text sysex="F000020B30080A000400000000F7">
+		<digit name="SLIP_INDICATOR_ENABLE" offset="9" offsetbit="5" nbbits="1"/>
+		<digit name="SLIP_POSITION_ENABLE" offset="9" offsetbit="4" nbbits="1"/>
+		<digit name="JOG_INDICATOR_ENABLE" offset="9" offsetbit="3" nbbits="1"/>
+		<digit name="JOG_POSITION_ENABLE" offset="9" offsetbit="2" nbbits="1"/>
+		<digit name="ENGINELOGO_ENABLE" offset="9" offsetbit="1" nbbits="1"/>
+		<digit name="ALBUMARTWORK_ENABLE" offset="9" offsetbit="0" nbbits="1"/>
+		
+		<digit name="LOOPTEXT_ENABLE" offset="10" offsetbit="1" nbbits="1" />
+		<digit name="DENONLOGO_ENABLE" offset="10" offsetbit="2" nbbits="1" />
+		<digit name="ALBUM_INDEX" offset="11" nbbits="7"/>
+		<digit name="LOOPTEXT" offset="12" nbbits="7"/>
+	</text>
+	
+	
+		
+	<text sysex="F000020B30080B0009000000000000000000F7">
+		<digit name="ALBUMART_ALPHA" offset="10" nbbits="8" bitsperbyte="4"  />
+	</text>
+	
+	<text sysex="F000020B30080B0009010F0F000000000000F7">
+		<digit name="ENGINELOGO_COLOR" offset="12" nbbits="24" bitsperbyte="4" order="bgr"/>
+	</text>
+
+	<text sysex="F000020B30080B0009020F0F000000000000F7">
+		<digit name="POSITIONRING_COLOR" offset="12" nbbits="24" bitsperbyte="4"  order="bgr"/>
+	</text>
+	
+	<text sysex="F000020B30080B0009040F0F000000000000F7">
+		<digit name="SLIPRING_COLOR" offset="12" nbbits="24" bitsperbyte="4"  order="bgr"/>
+	</text>
+	<text sysex="F000020B30080B0009050F0F000000000000F7">
+		<digit name="SLIPPOS_COLOR" offset="12" nbbits="24" bitsperbyte="4"  order="bgr"/>
+	</text>
+	
+	<text sysex="F000020B30080B0009080F0F000000000000F7">
+		<digit name="LOOPTEXT_COLOR" offset="12" nbbits="24" bitsperbyte="4"  order="bgr"/>
+	</text>
+
+		
+	<pitchout name="PLATTER_POSITION" channel="0" />
+	<pitchout name="SLIP_POSITION" channel="1" />
+	
+	<imagesysex name="LCD_ALBUM"  slot="1"  sysex="F000020B3008" />
+	<imagesysex name="LCD_ALBUM2" slot="2" sysex="F000020B3008" />
+	
+</device>

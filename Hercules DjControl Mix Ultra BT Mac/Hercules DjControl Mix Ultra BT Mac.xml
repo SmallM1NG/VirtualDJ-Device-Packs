@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device brand="Hercules" name="HDJCMIXU" author="Atomix Productions" home="yes" category="1"  platform="mac" version="850" description="Hercules DjControl Mix Ultra BT" type="MIDI"  macportname="DJControl Mix Ultra Bluetooth" decks="2" padcolumns="4" padrows="2" padsides="2" eq="soft" hardwareshift="yes">
+
+<!-- NO AUDIO -->
+	<pads defaults="hotcues,loop,pad fx,stems+fx,keycue,loop roll,slicer,sampler">
+		<page name="PAD FX">
+			<pad1 name="ECHO 1/2bt" color="color &apos;green&apos;">padfx &apos;Echo&apos; 0.5 0.5 smart_pressed</pad1>
+			<pad2 name="ECHO 1bt" color="color &apos;green&apos;">padfx &apos;Echo&apos; 0.5 0.7 smart_pressed</pad2>
+			<pad3 name="ECHO 2bt" color="color &apos;green&apos;">padfx &apos;Echo&apos; 0.5 0.8 smart_pressed</pad3>
+			<pad4 name="PHASER" color="color &apos;blue&apos;">padfx &apos;Phaser&apos; 60% 80% smart_pressed</pad4>
+			<pad5 name="CUT 1/4bt" color="color &apos;orange&apos;">padfx &quot;Cut&quot; 50% 40% smart_pressed</pad5>
+			<pad6 name="CUT 1/2bt" color="color &apos;orange&apos;">padfx &quot;Cut&quot; 50% 50% smart_pressed</pad6>
+			<pad7 name="CUT 1bt" color="color &apos;orange&apos;">padfx &quot;Cut&quot; 50% 60% smart_pressed</pad7>
+			<pad8 name="FLANGER" color="color &apos;yellow&apos;">padfx &quot;Flanger&quot; 0.6 0.7 smart_pressed</pad8>
+			<shift_pad1 name="ROLL 1/4bt" color="color &apos;cyan&apos;">padfx &apos;Loop Roll&apos; 100% 0.35 smart_pressed</shift_pad1>
+			<shift_pad2 name="ROLL 1/2bt" color="color &apos;cyan&apos;">padfx &apos;Loop Roll&apos; 100% 0.47 smart_pressed</shift_pad2>
+			<shift_pad3 name="ROLL 1bt" color="color &apos;cyan&apos;">padfx &apos;Loop Roll&apos; 100% 0.7 smart_pressed</shift_pad3>
+			<shift_pad4 name="REVERB" color="color &apos;violet&apos;">padfx &apos;Reverb&apos; 0.6 0.5 smart_pressed</shift_pad4>
+			<shift_pad5 name="BEATGRD 1" color="color &apos;magenta&apos;">padfx &quot;Beat Grid&quot; 0% smart_pressed</shift_pad5>
+			<shift_pad6 name="BEATGRD 4" color="color &apos;magenta&apos;">padfx &quot;Beat Grid&quot; 0.4 smart_pressed</shift_pad6>
+			<shift_pad7 name="BEATGRD 5" color="color &apos;magenta&apos;">padfx &quot;Beat Grid&quot; 0.6 smart_pressed</shift_pad7>
+			<shift_pad8 name="BRAKESTART" color="color &apos;red&apos;">padfx &quot;Brakestart&quot; 0.5 smart_pressed</shift_pad8>
+		</page>
+	</pads>
+	
+	
+	<!-- Request Faders positions -->
+	<init sendsysex="B07F7F" />  
+	
+	
+	<!-- Turn Off Bluetooth on init 
+	<init sendsysex="907F00" />-->
+	
+	<!-- Turn On Bluetooth on exit
+	<exit sendsysex="907F00" /> -->
+	
+	<!-- Request Battery Status  - Not used in Computer mode --> 
+		<!-- <init sendsysex="F000014E2101000B000000000000F7" />
+		Reply Get Battery status
+		F0 00 01 4E 21 03 00 0B 00 00 bb cc 00 00 F7
+		bb : battery level (0-100)
+		cc : charger status (0[Charger off]- 0x7F [Charger On])"
+		<sysexin sysexid="F000014E2103000B0000????0000F7">
+			<slider byte="10" min="0x00" max="0x7F" name="BATTERY_LEVEL"/>
+			<slider byte="11" min="0x00" max="0x7F" name="BATTERY_STATUS"/>
+		</sysexin>
+	-->
+	
+<group condition="BT_MODE">
+
+	<button note="0x04" channel="1" name="SHIFT" deck="1"/>
+	<button note="0x04" channel="2" name="SHIFT" deck="2"/>
+	
+
+	<!-- PADS MODES -->
+	<button note="0x0F" channel="1" deck="1" setpage="1" nbdecks="2" autoled="true" name="PAD_MODE_HOTCUES" />
+	<button note="0x10" channel="1" deck="1" setpage="2" nbdecks="2" autoled="true" name="PAD_MODE_LOOP" />
+	<button note="0x11" channel="1" deck="1" setpage="3" nbdecks="2" autoled="true" name="PAD_MODE_FX" />
+	<button note="0x12" channel="1" deck="1" setpage="4" nbdecks="2" autoled="true" name="PAD_MODE_STEMS" />
+	
+	<button note="0x13" channel="1" deck="1" setpage="5" nbdecks="2" autoled="true" name="SHIFT_PAD_MODE_KEYCUE" />
+	<button note="0x14" channel="1" deck="1" setpage="6" nbdecks="2" autoled="true" name="SHIFT_PAD_MODE_ROLL" />
+	<button note="0x15" channel="1" deck="1" setpage="7" nbdecks="2" autoled="true" name="SHIFT_PAD_MODE_SLICER" />
+	<button note="0x16" channel="1" deck="1" setpage="8" nbdecks="2" autoled="true" name="SHIFT_PAD_MODE_SAMPLER" />
+
+	
+	<!-- HC PADS -->
+	<button note="0x00" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_1" />
+	<button note="0x01" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_2" />
+	<button note="0x02" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_3" />
+	<button note="0x03" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_4" />
+	<button note="0x04" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_5" />
+	<button note="0x05" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_6" />
+	<button note="0x06" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_7" />
+	<button note="0x07" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="PAD_HOTCUE_8" />
+	
+	<button note="0x08" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_1" />
+	<button note="0x09" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_2" />
+	<button note="0x0A" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_3" />
+	<button note="0x0B" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_4" />
+	<button note="0x0C" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_5" />
+	<button note="0x0D" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_6" />
+	<button note="0x0E" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_7" />
+	<button note="0x0F" channel="6" deck="1" nbdecks="2" autoled="true" page="1" name="SHIFT_PAD_HOTCUE_8" />
+	
+	
+	<!-- LOOP PADS -->
+	<button note="0x10" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_1" />
+	<button note="0x11" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_2" />
+	<button note="0x12" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_3" />
+	<button note="0x13" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_4" />
+	<button note="0x14" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_5" />
+	<button note="0x15" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_6" />
+	<button note="0x16" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_7" />
+	<button note="0x17" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="PAD_LOOP_8" />
+	
+	<button note="0x18" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_1" />
+	<button note="0x19" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_2" />
+	<button note="0x1A" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_3" />
+	<button note="0x1B" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_4" />
+	<button note="0x1C" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_5" />
+	<button note="0x1D" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_6" />
+	<button note="0x1E" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_7" />
+	<button note="0x1F" channel="6" deck="1" nbdecks="2" autoled="true" page="2" name="SHIFT_PAD_LOOP_8" />
+	
+	<!-- FX PADS -->
+	<button note="0x20" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_1" />
+	<button note="0x21" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_2" />
+	<button note="0x22" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_3" />
+	<button note="0x23" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_4" />
+	<button note="0x24" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_5" />
+	<button note="0x25" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_6" />
+	<button note="0x26" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_7" />
+	<button note="0x27" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="PAD_FX_8" />
+	
+	<button note="0x28" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_1" />
+	<button note="0x29" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_2" />
+	<button note="0x2A" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_3" />
+	<button note="0x2B" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_4" />
+	<button note="0x2C" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_5" />
+	<button note="0x2D" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_6" />
+	<button note="0x2E" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_7" />
+	<button note="0x2F" channel="6" deck="1" nbdecks="2" autoled="true" page="3" name="SHIFT_PAD_FX_8" />
+	
+	<!-- STEMS PADS -->
+	<button note="0x30" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_1" />
+	<button note="0x31" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_2" />
+	<button note="0x32" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_3" />
+	<button note="0x33" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_4" />
+	<button note="0x34" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_5" />
+	<button note="0x35" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_6" />
+	<button note="0x36" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_7" />
+	<button note="0x37" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="PAD_STEMS_8" />
+	
+	<button note="0x38" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_1" />
+	<button note="0x39" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_2" />
+	<button note="0x3A" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_3" />
+	<button note="0x3B" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_4" />
+	<button note="0x3C" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_5" />
+	<button note="0x3D" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_6" />
+	<button note="0x3E" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_7" />
+	<button note="0x3F" channel="6" deck="1" nbdecks="2" autoled="true" page="4" name="SHIFT_PAD_STEMS_8" />
+	
+	<!-- KEYCUE PADS -->
+	<button note="0x40" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_1" />
+	<button note="0x41" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_2" />
+	<button note="0x42" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_3" />
+	<button note="0x43" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_4" />
+	<button note="0x44" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_5" />
+	<button note="0x45" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_6" />
+	<button note="0x46" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_7" />
+	<button note="0x47" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="PAD_KEYCUE_8" />
+	
+	<button note="0x48" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_1" />
+	<button note="0x49" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_2" />
+	<button note="0x4A" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_3" />
+	<button note="0x4B" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_4" />
+	<button note="0x4C" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_5" />
+	<button note="0x4D" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_6" />
+	<button note="0x4E" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_7" />
+	<button note="0x4F" channel="6" deck="1" nbdecks="2" autoled="true" page="5" name="SHIFT_PAD_KEYCUE_8" />
+	
+	
+	<!-- ROLL PADS -->
+	<button note="0x50" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_1" />
+	<button note="0x51" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_2" />
+	<button note="0x52" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_3" />
+	<button note="0x53" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_4" />
+	<button note="0x54" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_5" />
+	<button note="0x55" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_6" />
+	<button note="0x56" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_7" />
+	<button note="0x57" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="PAD_ROLL_8" />
+	
+	<button note="0x58" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_1" />
+	<button note="0x59" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_2" />
+	<button note="0x5A" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_3" />
+	<button note="0x5B" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_4" />
+	<button note="0x5C" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_5" />
+	<button note="0x5D" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_6" />
+	<button note="0x5E" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_7" />
+	<button note="0x5F" channel="6" deck="1" nbdecks="2" autoled="true" page="6" name="SHIFT_PAD_ROLL_8" />
+	
+	<!-- SLICER PADS -->
+	<button note="0x60" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_1" />
+	<button note="0x61" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_2" />
+	<button note="0x62" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_3" />
+	<button note="0x63" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_4" />
+	<button note="0x64" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_5" />
+	<button note="0x65" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_6" />
+	<button note="0x66" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_7" />
+	<button note="0x67" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="PAD_SLICER_8" />
+	
+	<button note="0x68" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_1" />
+	<button note="0x69" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_2" />
+	<button note="0x6A" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_3" />
+	<button note="0x6B" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_4" />
+	<button note="0x6C" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_5" />
+	<button note="0x6D" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_6" />
+	<button note="0x6E" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_7" />
+	<button note="0x6F" channel="6" deck="1" nbdecks="2" autoled="true" page="7" name="SHIFT_PAD_SLICER_8" />
+	
+	<!-- SAMPLER PADS -->
+	<button note="0x70" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_1" />
+	<button note="0x71" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_2" />
+	<button note="0x72" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_3" />
+	<button note="0x73" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_4" />
+	<button note="0x74" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_5" />
+	<button note="0x75" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_6" />
+	<button note="0x76" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_7" />
+	<button note="0x77" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="PAD_SAMPLER_8" />
+	
+	<button note="0x78" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_1" />
+	<button note="0x79" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_2" />
+	<button note="0x7A" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_3" />
+	<button note="0x7B" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_4" />
+	<button note="0x7C" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_5" />
+	<button note="0x7D" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_6" />
+	<button note="0x7E" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_7" />
+	<button note="0x7F" channel="6" deck="1" nbdecks="2" autoled="true" page="8" name="SHIFT_PAD_SAMPLER_8" />
+	
+	
+	<!-- DECKS -->
+	<button note="0x05" channel="1" deck="1" autoled="true" name="SYNC" />
+	<button note="0x06" channel="1" deck="1" autoled="true" name="CUE" />
+	<button note="0x07" channel="1" deck="1" autoled="true" name="PLAY" />
+	<button note="0x08" channel="1" deck="1" name="JOG_TOUCH" />
+	<slider cc="0x08" inverted="true" channel="1" deck="1" name="PITCH" />
+	<jog cc="0x0A" zero="0x00" full="256" channel="1" deck="1" name="JOG" />
+	<jog cc="0x09" zero="0x00" full="256" channel="1" deck="1" name="JOG_OUT" />
+	
+	<button note="0x05" channel="4" deck="1" autoled="true" name="SHIFT_SYNC" />
+	<button note="0x06" channel="4" deck="1" autoled="true" name="SHIFT_CUE" />
+	<button note="0x07" channel="4" deck="1" autoled="true" name="SHIFT_PLAY" />
+	<button note="0x08" channel="4" deck="1" name="SHIFT_JOG_TOUCH" />
+	<slider cc="0x08" inverted="true" channel="4" deck="1" name="SHIFT_PITCH" />
+	<jog cc="0x0A" zero="0x00" full="256" channel="4" deck="1" name="SHIFT_JOG" />
+	<jog cc="0x09" zero="0x00" full="256" channel="4" deck="1" name="SHIFT_JOG_OUT" />
+
+	
+	<button note="0x05" channel="2" deck="2" autoled="true" name="SYNC" />
+	<button note="0x06" channel="2" deck="2" autoled="true" name="CUE" />
+	<button note="0x07" channel="2" deck="2" autoled="true" name="PLAY" />
+	<button note="0x08" channel="2" deck="2" name="JOG_TOUCH" />
+	<slider cc="0x08" inverted="true" channel="2" deck="2" name="PITCH" />
+	<jog cc="0x0A" zero="0x00" full="256" channel="2" deck="2" name="JOG" />
+	<jog cc="0x09" zero="0x00" full="256" channel="2" deck="2" name="JOG_OUT" />
+	
+	<button note="0x05" channel="5" deck="2" autoled="true" name="SHIFT_SYNC" />
+	<button note="0x06" channel="5" deck="2" autoled="true" name="SHIFT_CUE" />
+	<button note="0x07" channel="5" deck="2" autoled="true" name="SHIFT_PLAY" />
+	<button note="0x08" channel="5" deck="2" name="SHIFT_JOG_TOUCH" />
+	<slider cc="0x08" inverted="true" channel="5" deck="2" name="SHIFT_PITCH" />
+	<jog cc="0x0A" zero="0x00" full="256" channel="5" deck="2" name="SHIFT_JOG" />
+	<jog cc="0x09" zero="0x00" full="256" channel="5" deck="2" name="SHIFT_JOG_OUT" />
+	
+	<!-- MIXER & BROWSER -->
+	<slider cc="0x00" channel="0" name="CROSSFADER" />
+	<slider cc="0x03" channel="0" name="MASTER_VOLUME" />
+	<slider cc="0x00" channel="1" deck="1" name="VOLUME" />
+	<slider cc="0x00" channel="2" deck="2" name="VOLUME" />
+	<slider cc="0x04" channel="1" deck="1" name="EQ_HIGH" />
+	<slider cc="0x04" channel="2" deck="2" name="EQ_HIGH" />
+	<slider cc="0x03" channel="1" deck="1" name="EQ_MID" />
+	<slider cc="0x03" channel="2" deck="2" name="EQ_MID" />
+	<slider cc="0x02" channel="1" deck="1" name="EQ_LOW" />
+	<slider cc="0x02" channel="2" deck="2" name="EQ_LOW" />
+	<slider cc="0x01" channel="1" deck="1" name="FILTER" />
+	<slider cc="0x01" channel="2" deck="2" name="FILTER" />
+	<button note="0x0C" channel="1" deck="1" autoled="true" name="PFL" />
+	<button note="0x0C" channel="2" deck="2" autoled="true" name="PFL" />
+	<button note="0x01" channel="0" autoled="true" name="STEMS_MODE" />
+	
+	<button note="0x0D" channel="1" deck="1" name="LOAD" />
+	<button note="0x0D" channel="2" deck="2" name="LOAD" />
+	<button note="0x0E" channel="1" deck="1" name="LOAD_LONGPRESS" />
+	<button note="0x0E" channel="2" deck="2" name="LOAD_LONGPRESS" />
+	<encoder cc="0x01" zero="0x00" name="BROWSE_ENC" channel="0" />
+	<button note="0x00" channel="0" name="BROWSE_ENC_PUSH" />
+	
+	<slider cc="0x00" channel="4" deck="1" name="SHIFT_VOLUME" />
+	<slider cc="0x00" channel="5" deck="2" name="SHIFT_VOLUME" />
+	<slider cc="0x04" channel="4" deck="1" name="SHIFT_EQ_HIGH" />
+	<slider cc="0x04" channel="5" deck="2" name="SHIFT_EQ_HIGH" />
+	<slider cc="0x03" channel="4" deck="1" name="SHIFT_EQ_MID" />
+	<slider cc="0x03" channel="5" deck="2" name="SHIFT_EQ_MID" />
+	<slider cc="0x02" channel="4" deck="1" name="SHIFT_EQ_LOW" />
+	<slider cc="0x02" channel="5" deck="2" name="SHIFT_EQ_LOW" />
+	<slider cc="0x01" channel="4" deck="1" name="SHIFT_FILTER" />
+	<slider cc="0x01" channel="5" deck="2" name="SHIFT_FILTER" />
+	<button note="0x0C" channel="4" deck="1" autoled="true" name="SHIFT_PFL" />
+	<button note="0x0C" channel="5" deck="2" autoled="true" name="SHIFT_PFL" />
+
+	<button note="0x0D" channel="4" deck="1" name="SHIFT_LOAD" />
+	<button note="0x0D" channel="5" deck="2" name="SHIFT_LOAD" />
+	<button note="0x0E" channel="4" deck="1" name="SHIFT_LOAD_LONGPRESS" />
+	<button note="0x0E" channel="5" deck="2" name="SHIFT_LOAD_LONGPRESS" />
+	<encoder cc="0x01" zero="0x00" name="SHIFT_BROWSE_ENC" channel="3" />
+	<button note="0x00" channel="3" name="SHIFT_BROWSE_ENC_PUSH" />
+	
+	<button note="0x01" channel="3" autoled="true" name="SHIFT_STEMS_MODE" />
+	
+</group>
+</device>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device brand="Denon DJ" name="DNPRIME4A" author="Atomix Productions" category="0" maindevice="DNPRIME4" version="800" description="Denon DJ Prime 4 Audio" type="MIDI" hidden="true" vid="0x15E4" pid="0xC008" decks="1" >
+<settings>
+	<USBMasterDBLevel tooltip="Adjust the pre-fader Master Output level. Values in db from -20 to +20" default="9"/>
+	<USBRecordDBLevel tooltip="Adjust the Record Input level. Values in db from -20 to +20" default="8"/>
+	<USBHeadphonesDBLevel tooltip="Adjust the pre-fader Headphones Output level. Values in db from -20 to +20" default="8"/>
+</settings>
+<!--USB Output Level
+0xBF 0x49 0x00-0x28. (-20dB to +20dB, 1dB step)
+USB input level for Master/Zone
+0xBF 0x4B 0x00-0x28 (-20dB~+20dB, 1dB step)
+USB input level for Cue
+0xBF 0x4C 0x00-0x28 (-20dB~+20dB, 1dB step)
+-->
+	
+	<digit cc="0x4C" min="0x00" max="0x28" addition="20" multiplier="0.025" name="USB_HP_LEVEL" channel="15" />
+	<digit cc="0x4B" min="0x00" max="0x28" addition="20" multiplier="0.025" name="USB_OUTPUT_LEVEL" channel="15" />
+	<digit cc="0x49" min="0x00" max="0x28" addition="20" multiplier="0.025" name="USB_INPUT_LEVEL" channel="15" />
+</device>

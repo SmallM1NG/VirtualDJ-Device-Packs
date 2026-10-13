@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper device="HDJCMIXU" version="850" date="2025-03-17">
+	<map value="ONINIT" action="get_controller_name &amp; param_contains &apos;Mix Ultra BT&apos; ? set &apos;$btmode&apos; 1 : set &apos;$btmode&apos; 0" />
+	<map value="BT_MODE" action="var &apos;$btmode&apos; ? true : false" />
+	<map value="USB_MODE" action="var &apos;$btmode&apos; ? false : true" />
+	<map value="SHIFT" action="shift" />
+	<map value="VOLUME" action="level" />
+	<map value="CROSSFADER" action="crossfader" />
+	<map value="FILTER" action="filter" />
+	<map value="EQ_LOW" action="eq_low" />
+	<map value="EQ_MID" action="eq_mid" />
+	<map value="EQ_HIGH" action="eq_high" />
+	<map value="SHIFT_EQ_HIGH" action="gain" />
+	<map value="PFL" action="pfl" />
+	<map value="MASTER_VOLUME" action="master_volume" />
+	<map value="PITCH" action="pitch_slider" />
+	<map value="JOG_TOUCH" action="touchwheel_touch" />
+	<map value="JOG" action="touchwheel" />
+	<map value="JOG_OUT" action="touchwheel" />
+	<map value="SHIFT_JOG" action="touchwheel &apos;search&apos;" />
+	<map value="SHIFT_JOG_TOUCH" action="touchwheel_touch &apos;search&apos;" />
+	<map value="SHIFT_JOG_OUT" action="touchwheel" />
+	<map value="PLAY" action="pioneer_play" />
+	<map value="CUE" action="pioneer_cue" />
+	<map value="SHIFT_CUE" action="goto_start" />
+	<map value="SYNC" action="sync" />
+	<map value="LOAD" action="doubleclick ? clone_from_deck : load" />
+	<map value="SHIFT_LOAD" action="unload" />
+	<map value="BROWSE_ENC" action="browser_scroll" />
+	<map value="BROWSE_ENC_PUSH" action="browser_folder ? doubleclick ? browser_folder : browser_enter : browser_window &apos;folders&apos;" />
+	<map value="SHIFT_BROWSE_ENC" action="param_bigger 0 ? browser_scroll +10 : browser_scroll -10" />
+	<map value="SHIFT_BROWSE_ENC_PUSH" action="browser_window &apos;sideview&apos;" />
+	<map value="STEMS_MODE" action="setting &apos;stemsRealtimeSeparation&apos; &apos;Fully Disabled&apos; ? nothing : eq_mode +1" />
+	<map value="LED_STEMS_MODE" action="setting &apos;stemsRealtimeSeparation&apos; &apos;Fully Disabled&apos; ? off : eq_mode &apos;frequency&apos; ? off : on" />
+	<map value="PAD_MODE_HOTCUES" action="pad_page 1" />
+	<map value="PAD_MODE_LOOP" action="pad_page 2" />
+	<map value="PAD_MODE_FX" action="pad_page 3" />
+	<map value="PAD_MODE_STEMS" action="pad_page 4" />
+	<map value="SHIFT_PAD_MODE_KEYCUE" action="pad_page 5" />
+	<map value="SHIFT_PAD_MODE_ROLL" action="pad_page 6" />
+	<map value="SHIFT_PAD_MODE_SLICER" action="pad_page 7" />
+	<map value="SHIFT_PAD_MODE_SAMPLER" action="pad_page 8" />
+	<map value="PAD_HOTCUE_1" action="pad 1" />
+	<map value="PAD_HOTCUE_2" action="pad 2" />
+	<map value="PAD_HOTCUE_3" action="pad 3" />
+	<map value="PAD_HOTCUE_4" action="pad 4" />
+	<map value="PAD_HOTCUE_5" action="pad 5" />
+	<map value="PAD_HOTCUE_6" action="pad 6" />
+	<map value="PAD_HOTCUE_7" action="pad 7" />
+	<map value="PAD_HOTCUE_8" action="pad 8" />
+	<map value="SHIFT_PAD_HOTCUE_1" action="padshift 1" />
+	<map value="SHIFT_PAD_HOTCUE_2" action="padshift 2" />
+	<map value="SHIFT_PAD_HOTCUE_3" action="padshift 3" />
+	<map value="SHIFT_PAD_HOTCUE_4" action="padshift 4" />
+	<map value="SHIFT_PAD_HOTCUE_5" action="padshift 5" />
+	<map value="SHIFT_PAD_HOTCUE_6" action="padshift 6" />
+	<map value="SHIFT_PAD_HOTCUE_7" action="padshift 7" />
+	<map value="SHIFT_PAD_HOTCUE_8" action="padshift 8" />
+	<map value="PAD_LOOP_1" action="pad 1" />
+	<map value="PAD_LOOP_2" action="pad 2" />
+	<map value="PAD_LOOP_3" action="pad 3" />
+	<map value="PAD_LOOP_4" action="pad 4" />
+	<map value="PAD_LOOP_5" action="pad 5" />
+	<map value="PAD_LOOP_6" action="pad 6" />
+	<map value="PAD_LOOP_7" action="pad 7" />
+	<map value="PAD_LOOP_8" action="pad 8" />
+	<map value="SHIFT_PAD_LOOP_1" action="padshift 1" />
+	<map value="SHIFT_PAD_LOOP_2" action="padshift 2" />
+	<map value="SHIFT_PAD_LOOP_3" action="padshift 3" />
+	<map value="SHIFT_PAD_LOOP_4" action="padshift 4" />
+	<map value="SHIFT_PAD_LOOP_5" action="padshift 5" />
+	<map value="SHIFT_PAD_LOOP_6" action="padshift 6" />
+	<map value="SHIFT_PAD_LOOP_7" action="padshift 7" />
+	<map value="SHIFT_PAD_LOOP_8" action="padshift 8" />
+	<map value="PAD_FX_1" action="pad 1" />
+	<map value="PAD_FX_2" action="pad 2" />
+	<map value="PAD_FX_3" action="pad 3" />
+	<map value="PAD_FX_4" action="pad 4" />
+	<map value="PAD_FX_5" action="pad 5" />
+	<map value="PAD_FX_6" action="pad 6" />
+	<map value="PAD_FX_7" action="pad 7" />
+	<map value="PAD_FX_8" action="pad 8" />
+	<map value="SHIFT_PAD_FX_1" action="padshift 1" />
+	<map value="SHIFT_PAD_FX_2" action="padshift 2" />
+	<map value="SHIFT_PAD_FX_3" action="padshift 3" />
+	<map value="SHIFT_PAD_FX_4" action="padshift 4" />
+	<map value="SHIFT_PAD_FX_5" action="padshift 5" />
+	<map value="SHIFT_PAD_FX_6" action="padshift 6" />
+	<map value="SHIFT_PAD_FX_7" action="padshift 7" />
+	<map value="SHIFT_PAD_FX_8" action="padshift 8" />
+	<map value="PAD_STEMS_1" action="pad 1" />
+	<map value="PAD_STEMS_2" action="pad 2" />
+	<map value="PAD_STEMS_3" action="pad 3" />
+	<map value="PAD_STEMS_4" action="pad 4" />
+	<map value="PAD_STEMS_5" action="pad 5" />
+	<map value="PAD_STEMS_6" action="pad 6" />
+	<map value="PAD_STEMS_7" action="pad 7" />
+	<map value="PAD_STEMS_8" action="pad 8" />
+	<map value="SHIFT_PAD_STEMS_1" action="padshift 1" />
+	<map value="SHIFT_PAD_STEMS_2" action="padshift 2" />
+	<map value="SHIFT_PAD_STEMS_3" action="padshift 3" />
+	<map value="SHIFT_PAD_STEMS_4" action="padshift 4" />
+	<map value="SHIFT_PAD_STEMS_5" action="padshift 5" />
+	<map value="SHIFT_PAD_STEMS_6" action="padshift 6" />
+	<map value="SHIFT_PAD_STEMS_7" action="padshift 7" />
+	<map value="SHIFT_PAD_STEMS_8" action="padshift 8" />
+	<map value="PAD_KEYCUE_1" action="pad 1" />
+	<map value="PAD_KEYCUE_2" action="pad 2" />
+	<map value="PAD_KEYCUE_3" action="pad 3" />
+	<map value="PAD_KEYCUE_4" action="pad 4" />
+	<map value="PAD_KEYCUE_5" action="pad 5" />
+	<map value="PAD_KEYCUE_6" action="pad 6" />
+	<map value="PAD_KEYCUE_7" action="pad 7" />
+	<map value="PAD_KEYCUE_8" action="pad 8" />
+	<map value="SHIFT_PAD_KEYCUE_1" action="padshift 1" />
+	<map value="SHIFT_PAD_KEYCUE_2" action="padshift 2" />
+	<map value="SHIFT_PAD_KEYCUE_3" action="padshift 3" />
+	<map value="SHIFT_PAD_KEYCUE_4" action="padshift 4" />
+	<map value="SHIFT_PAD_KEYCUE_5" action="padshift 5" />
+	<map value="SHIFT_PAD_KEYCUE_6" action="padshift 6" />
+	<map value="SHIFT_PAD_KEYCUE_7" action="padshift 7" />
+	<map value="SHIFT_PAD_KEYCUE_8" action="padshift 8" />
+	<map value="PAD_ROLL_1" action="pad 1" />
+	<map value="PAD_ROLL_2" action="pad 2" />
+	<map value="PAD_ROLL_3" action="pad 3" />
+	<map value="PAD_ROLL_4" action="pad 4" />
+	<map value="PAD_ROLL_5" action="pad 5" />
+	<map value="PAD_ROLL_6" action="pad 6" />
+	<map value="PAD_ROLL_7" action="pad 7" />
+	<map value="PAD_ROLL_8" action="pad 8" />
+	<map value="SHIFT_PAD_ROLL_1" action="padshift 1" />
+	<map value="SHIFT_PAD_ROLL_2" action="padshift 2" />
+	<map value="SHIFT_PAD_ROLL_3" action="padshift 3" />
+	<map value="SHIFT_PAD_ROLL_4" action="padshift 4" />
+	<map value="SHIFT_PAD_ROLL_5" action="padshift 5" />
+	<map value="SHIFT_PAD_ROLL_6" action="padshift 6" />
+	<map value="SHIFT_PAD_ROLL_7" action="padshift 7" />
+	<map value="SHIFT_PAD_ROLL_8" action="padshift 8" />
+	<map value="PAD_SLICER_1" action="pad 1" />
+	<map value="PAD_SLICER_2" action="pad 2" />
+	<map value="PAD_SLICER_3" action="pad 3" />
+	<map value="PAD_SLICER_4" action="pad 4" />
+	<map value="PAD_SLICER_5" action="pad 5" />
+	<map value="PAD_SLICER_6" action="pad 6" />
+	<map value="PAD_SLICER_7" action="pad 7" />
+	<map value="PAD_SLICER_8" action="pad 8" />
+	<map value="SHIFT_PAD_SLICER_1" action="padshift 1" />
+	<map value="SHIFT_PAD_SLICER_2" action="padshift 2" />
+	<map value="SHIFT_PAD_SLICER_3" action="padshift 3" />
+	<map value="SHIFT_PAD_SLICER_4" action="padshift 4" />
+	<map value="SHIFT_PAD_SLICER_5" action="padshift 5" />
+	<map value="SHIFT_PAD_SLICER_6" action="padshift 6" />
+	<map value="SHIFT_PAD_SLICER_7" action="padshift 7" />
+	<map value="SHIFT_PAD_SLICER_8" action="padshift 8" />
+	<map value="PAD_SAMPLER_1" action="pad 1" />
+	<map value="PAD_SAMPLER_2" action="pad 2" />
+	<map value="PAD_SAMPLER_3" action="pad 3" />
+	<map value="PAD_SAMPLER_4" action="pad 4" />
+	<map value="PAD_SAMPLER_5" action="pad 5" />
+	<map value="PAD_SAMPLER_6" action="pad 6" />
+	<map value="PAD_SAMPLER_7" action="pad 7" />
+	<map value="PAD_SAMPLER_8" action="pad 8" />
+	<map value="SHIFT_PAD_SAMPLER_1" action="padshift 1" />
+	<map value="SHIFT_PAD_SAMPLER_2" action="padshift 2" />
+	<map value="SHIFT_PAD_SAMPLER_3" action="padshift 3" />
+	<map value="SHIFT_PAD_SAMPLER_4" action="padshift 4" />
+	<map value="SHIFT_PAD_SAMPLER_5" action="padshift 5" />
+	<map value="SHIFT_PAD_SAMPLER_6" action="padshift 6" />
+	<map value="SHIFT_PAD_SAMPLER_7" action="padshift 7" />
+	<map value="SHIFT_PAD_SAMPLER_8" action="padshift 8" />
+</mapper>

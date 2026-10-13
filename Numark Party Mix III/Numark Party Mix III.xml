@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device brand="Numark" name="NMPARTY3" author="Atomix Productions" home="yes" category="1" version="800" description="Numark Party Mix III" type="MIDI" vid="0x15E4" pid="0x005C" sysexid="F07E??060200013F5C" decks="2" senddelay="2" padColumns="4" padRows="2" padSides="2" eq="soft">
+<audio description="Numark Party Mix III" vid="0x15E4" pid="0x005C" input="0" output="2" mic="no" mixer="yes" />
+
+<pads defaults="Hotcues,Loop+BeatJump,PadFX,Sampler,Stems+FX=12,Stems+FX=16">
+	<page name="PM Lights">
+		<pad1 name="OFF" query="var &apos;$ballmode&apos; 0" tooltip="PartyMix Lights Mode Off\nLights mode is changed from Party Mix" color="color &apos;red&apos;">nothing</pad1>
+		<pad2 name="VDJ" query="var &apos;$ballmode&apos; 1" tooltip="PartyMix Lights Mode controled by VirtualDJ\nChoose PROG 1 to PROG 3\nLights mode is changed from Party Mix" color="color &apos;cyan&apos;">nothing</pad2>
+		<pad3 name="AUTO-BEAT" query="var &apos;$ballmode&apos; 2" tooltip="PartyMix Lights Mode Auto-Beat\nPattern is changed from Party Mix based on Tracks Beat\nLights mode is changed from Party Mix" color="color &apos;magenta&apos;">nothing</pad3>
+		<pad4 name="AUTO" query="var &apos;$ballmode&apos; 3" tooltip="PartyMix Lights Mode Auto\nPattern is changed from Party Mix on a steady Tempo\nLights mode is changed from Party Mix" color="color &apos;orange&apos;">nothing</pad4>
+		<pad5 name="ON" query="var &apos;$ballmode&apos; 4" tooltip="PartyMix Lights Mode Off\nLights mode is changed from Party Mix" color="color &apos;green&apos;">nothing</pad5>
+		<param1 tooltip="Change Programs (1 to 3) when in VDJ Mode" name="`var &apos;$ballmode&apos; 1 ? get_text &quot;PROG `var &apos;@$PMprogram&apos; ? get_var &apos;@$PMprogram&apos; &amp; param_add 1 : constant 1`&quot; : get_text &quot;&quot;`">var &apos;$ballmode&apos; 1 ? param_bigger 0 ? cycle &apos;@$PMprogram&apos; 3 : cycle &apos;@$PMprogram&apos; -3 : nothing</param1>
+		<param2 />
+	</page>
+	<page name="LOOP+BEATJUMP" shortname="LOOP+BJ">
+		<pad1 color="color &apos;green&apos;" name="`var &apos;@loopbank&apos; 1 ? get_text &apos;8 bt&apos; : var &apos;@loopbank&apos; 2 ? get_text &apos;1/8 bt&apos; : get_text &apos;1 bt&apos;`">var &apos;@loopbank&apos; 1 ? loop 8 : var &apos;@loopbank&apos; 2 ? loop 0.125 : loop 1</pad1>
+		<pad2 color="color &apos;green&apos;" name="`var &apos;@loopbank&apos; 1 ? get_text &apos;16 bt&apos; : var &apos;@loopbank&apos; 2 ? get_text &apos;1/4 bt&apos; : get_text &apos;2 bt&apos;`">var &apos;@loopbank&apos; 1 ? loop 16 : var &apos;@loopbank&apos; 2 ? loop 0.25 : loop 2</pad2>
+		<pad3 color="color &apos;green&apos;" name="`var &apos;@loopbank&apos; 1 ? get_text &apos;32 bt&apos; : var &apos;@loopbank&apos; 2 ? get_text &apos;1/2 bt&apos; : get_text &apos;4 bt&apos;`">var &apos;@loopbank&apos; 1 ? loop 32 : var &apos;@loopbank&apos; 2 ? loop 0.5 : loop 4</pad3>
+		<pad4 color="color &apos;green&apos;" name="`var &apos;@loopbank&apos; 1 ? get_text &apos;64 bt&apos; : var &apos;@loopbank&apos; 2 ? get_text &apos;1 bt&apos; : get_text &apos;8 bt&apos;`">var &apos;@loopbank&apos; 1 ? loop 64 : var &apos;@loopbank&apos; 2 ? loop 1 : loop 8</pad4>
+		<pad5 name="-" color="color &apos;orange&apos;">beatjump_select -1</pad5>
+		<pad6 name="+" color="color &apos;orange&apos;">beatjump_select +1</pad6>
+		<pad7 name="↶ `beatjump_select`" color="color &apos;red&apos;">beatjump -1</pad7>
+		<pad8 name="↷ `beatjump_select`" color="color &apos;red&apos;" >beatjump +1</pad8>
+		<param1 name="LOOP BANK">param_bigger 0 ? var &apos;@loopbank&apos; 1 ? nothing : var &apos;@loopbank&apos; 2 ? set &apos;@loopbank&apos; 0 : set &apos;@loopbank&apos; 1 : var &apos;@loopbank&apos; 2 ? nothing : var &apos;@loopbank&apos; 1 ? set &apos;@loopbank&apos; 0 : set &apos;@loopbank&apos; 2</param1>
+		<param2 />
+	</page>
+</pads>
+
+	<!-- Request Device Info-SysEx - needed to turn Off Vegas/Demo Mode - SysEx : F07E00060200013F5C 00 19 02 00 03 06 00 00 00-->
+	<init sendsysex="F07E000601F7" />
+	<!-- Request Sliders Position or .. F0 00 01 3F 7F 5C 04 00 00 f7-->
+	<init sendsysex="F000207F0301F7" />
+	
+	<!-- Turn Off dimmed Leds On Exit -->
+	<exit sendsysex="9E7F00" />
+	
+	
+	<!-- Per Deck - Channels 0,1-->
+	<button note="0x20" name="SHIFT" nbdecks="2" channel="0" deck="1"  />
+	
+	<button note="0x1B" name="PFL" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1"  />
+	<button note="0x54" name="SHIFT_PFL" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" globalshift="true" />
+	<button note="0x02" name="SYNC" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x03" name="SHIFT_SYNC" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x01" name="CUE" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x05" name="SHIFT_CUE" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x00" name="PLAY" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x04" name="SHIFT_PLAY" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x46" name="ACAPELLA" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x47" name="SHIFT_ACAPELLA" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x48" name="INSTRUMENTAL" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x49" name="SHIFT_INSTRUMENTAL" autoled="true" zero="0x01" nbdecks="2" channel="0" deck="1" />
+	<button note="0x50" name="JOG_TOUCH" nbdecks="2" channel="0" deck="1" />
+	
+	<slider ccmsb="0x09" cclsb="0x29" name="PITCH" nbdecks="2" channel="0" deck="1" />
+	<jog cc="0x06" name="JOG" full="300" nbdecks="2" channel="0" deck="1" />	
+	<jog cc="0x2B" name="SHIFT_JOG" full="300" nbdecks="2" channel="0" deck="1" />	
+	
+	<slider cc="0x17" name="EQ_HIGH" zero="0x40" zerorange="4" channel="0" nbdecks="2" deck="1" />
+	<slider cc="0x18" name="EQ_MID" zero="0x40" zerorange="4" channel="0" nbdecks="2" deck="1" />
+	<slider cc="0x19" name="EQ_LOW" zero="0x40" zerorange="4" channel="0" nbdecks="2" deck="1" />
+	<slider cc="0x1A" name="FILTER" zero="0x40" zerorange="4" channel="0" nbdecks="2" deck="1" />
+	<slider cc="0x1C" name="VOLUME" channel="0" nbdecks="2" deck="1" />
+	
+	<led note="0x2E" name="LED_BEAT_ALIGN_FW" zero="0x01" channel="0" nbdecks="2" deck="1"/>
+	<led note="0x2F" name="LED_BEAT_ALIGN_CENTER" zero="0x01" channel="0" nbdecks="2" deck="1"/>
+	<led note="0x30" name="LED_BEAT_ALIGN_REV" zero="0x01" channel="0" nbdecks="2" deck="1"/>
+
+	<!-- Global - Channel 15-->
+	<slider cc="0x08" name="CROSSFADER" channel="15" />
+	<encoder cc="0x00" name="BROWSE" channel="15" />
+	<encoder cc="0x01" name="SHIFT_BROWSE" channel="15" />
+	<button note="0x07" name="BROWSE_PUSH" channel="15" />
+	<button note="0x46" name="FADE_FX" autoled="true" zero="0x01" channel="15" />
+	<button note="0x47" name="SHIFT_FADE_FX" autoled="true" zero="0x01" channel="15" />
+	
+	<button note="0x02" name="LOAD" channel="15" deck="1" />
+	<button note="0x03" name="LOAD" channel="15" deck="2" />
+	<button note="0x12" name="SHIFT_LOAD" channel="15"  /> <!-- Global Add to Prepare -->
+
+	<slider cc="0x0C" name="HEADPHONES_VOLUME" channel="15" />
+	<slider cc="0x0A" name="MASTER_VOLUME" channel="15" />
+
+	
+	<!-- PADS - Channels 4,5 -->
+	<button note="0x00" name="PADS_MODE" channel="4" nbdecks="2" deck="1" />
+	<led note="0x01" name="LED_MODE1" zero="0x01" channel="4" nbdecks="2" deck="1"/>
+	<led note="0x02" name="LED_MODE2" zero="0x01" channel="4" nbdecks="2" deck="1"/>
+	<led note="0x03" name="LED_MODE3" zero="0x01" channel="4" nbdecks="2" deck="1"/>
+	<led note="0x04" name="LED_MODE4" zero="0x01" channel="4" nbdecks="2" deck="1"/>
+	
+	<button note="0x14" name="PAD1" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x15" name="PAD2" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x16" name="PAD3" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x17" name="PAD4" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x18" name="PAD5" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x19" name="PAD6" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x1A" name="PAD7" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x1B" name="PAD8" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	
+	<button note="0x1C" name="SHIFT_PAD1" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x1D" name="SHIFT_PAD2" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x1E" name="SHIFT_PAD3" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x1F" name="SHIFT_PAD4" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x20" name="SHIFT_PAD5" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x21" name="SHIFT_PAD6" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x22" name="SHIFT_PAD7" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	<button note="0x23" name="SHIFT_PAD8" channel="4" autoled="true" zero="0x01" nbdecks="2" deck="1" />
+	
+	<!-- Party Ball Leds -->
+	<button note="0x20" name="PBALL_MODE_OFF" value="0x00" inverted="true" channel="15"  />
+	<button note="0x20" name="PBALL_MODE_1" value="0x01" channel="15"  />
+	<button note="0x20" name="PBALL_MODE_2" value="0x02" channel="15"  />
+	<button note="0x20" name="PBALL_MODE_3" value="0x03" channel="15"  />
+	<button note="0x20" name="PBALL_MODE_4" value="0x04" channel="15"  />
+
+	<bar cc="0x40" min="0x00" max="0x7F" name="PBALL_RED" channel="15" />
+	<bar cc="0x41" min="0x00" max="0x7F" name="PBALL_GREEN" channel="15" />
+	<bar cc="0x43" min="0x00" max="0x7F" name="PBALL_BLUE" channel="15" />
+	<sysex value="9F407F" name="PBALL_AUTO" />
+
+</device>

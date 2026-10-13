@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device brand="Denon DJ" name="DNPRIME4" author="Atomix Productions" related="DNPRIME4LW,DNPRIME4RW" screenType="1" controllerskin="Denon Prime4 Screen"  skinName="Denon Prime4 Screen.zip" skinAddonId="81106" description="Denon DJ Prime 4" version="830" category="4" type="MIDI" vid="0x15E4" pid="0x8008" decks="4" padColumns="4" padRows="2" padSides="2" driverCheckAudioPc="optional" eq="soft">
+<audio description="Denon DJ Prime 4" vid="0x15E4" pid="0xC008" asio="DENON DJ PRIME 4 ASIO" output="2" input="2" inputChannels="1,2,3,4" mixer="yes" record="5,6"/>	
+<!--Notes-  To-Do - Missing
+- No Mac drivers needed 
+- XFADER CONTOUR not sending MIDI (asked Denon to add)
+- Booth and Zone linked to MAster (asked Denon to add)
+--> 
+<pads defaults="hotcues,loop,loop roll,slicer,remix points,saved loops,scratch,sampler,cueloop,manual loop,beatjump,keycue"/>
+
+	<!--Serato negiotiation  - Removed Not needed
+	<sysexin sysexid="F000207F010201" name="SYSEXIN" negotiate="serato" param1="F000207F01020101" endnegotiate="0x51" />
+	-->
+		<!-- Request Faders Position  -->
+   <init sendsysex="F000020B7F0860000404010000F7" />
+   
+   <!-- Clear OLDEs  -->
+	<init sendsysex="F000020B00080A0007000003007F0000F7"/>
+	<init sendsysex="F000020B00080A0007010003007F0000F7"/>
+	<init sendsysex="F000020B00080A0007020003007F0000F7"/>
+	<init sendsysex="F000020B00080A0007030003007F0000F7"/>
+	<init sendsysex="F000020B00080A0007040003007F0000F7"/>
+	<init sendsysex="F000020B00080A0007050003007F0000F7"/>
+	<init sendsysex="F000020B00080A0007060003007F0000F7"/>
+	<init sendsysex="F000020B00080A0007070003007F0000F7"/>
+	<!-- Clear VUs  -->
+	<!-- Clear VUs  -->
+	<init sendsysex="BF2000"/>
+	<init sendsysex="BF2100"/>
+	<init sendsysex="B00A00"/>
+	<init sendsysex="B10A00"/>
+	<init sendsysex="B20A00"/>
+	<init sendsysex="B30A00"/>
+	
+	<!-- VU Meters -->
+	<bar cc="0x0A" values="0x00,0x0E,0x1B,0x28,0x35,0x42,0x4F,0x5C,0x69,0x75,0x7F" name="VUMETER" channel="0" deck="1">
+		<addition multiplier="10" name="VUMETER_PEAK" deck="1"/>
+	</bar>
+	<bar cc="0x0A" values="0x00,0x0E,0x1B,0x28,0x35,0x42,0x4F,0x5C,0x69,0x75,0x7F" name="VUMETER" channel="1" deck="2">
+		<addition multiplier="10" name="VUMETER_PEAK" deck="2"/>
+	</bar>
+	<bar cc="0x0A" values="0x00,0x0E,0x1B,0x28,0x35,0x42,0x4F,0x5C,0x69,0x75,0x7F" name="VUMETER" channel="2" deck="3">
+		<addition multiplier="10" name="VUMETER_PEAK" deck="3"/>
+	</bar>
+	<bar cc="0x0A" values="0x00,0x0E,0x1B,0x28,0x35,0x42,0x4F,0x5C,0x69,0x75,0x7F" name="VUMETER" channel="3" deck="4">
+		<addition multiplier="10" name="VUMETER_PEAK" deck="4"/>
+	</bar>
+	<!-- Should not be used when Prime 4 is the Master Output -->
+	<bar cc="0x20" values="0x00,0x0E,0x1B,0x28,0x35,0x42,0x4F,0x5C,0x69,0x75,0x7F" name="MASTER_VUMETER_LEFT" channel="15" >
+		<addition multiplier="10" name="MASTER_VUMETER_PEAK_LEFT" />
+	</bar>
+	<bar cc="0x21" values="0x00,0x0E,0x1B,0x28,0x35,0x42,0x4F,0x5C,0x69,0x75,0x7F" name="MASTER_VUMETER_RIGHT" channel="15" >
+		<addition multiplier="10" name="MASTER_VUMETER_PEAK_RIGHT" />
+	</bar>
+	
+	
+	<button note="0x1C" name="DECK_1" deck="1" channel="15" />
+	<button note="0x1D" name="DECK_2" deck="2" channel="15" />
+	<button note="0x1E" name="DECK_3" deck="3" channel="15" />
+	<button note="0x1F" name="DECK_4" deck="4" channel="15" />
+	<color note="0x1C" name="LED_DECK_1" deck="1" channel="15" />
+	<color note="0x1D" name="LED_DECK_2" deck="2" channel="15" />
+	<color note="0x1E" name="LED_DECK_3" deck="3" channel="15" />
+	<color note="0x1F" name="LED_DECK_4" deck="4" channel="15" />
+ 
+	<!-- FX-->
+	<button note="0x06" name="FX_ON" deck="left" channel="6" />
+	<button note="0x07" name="FX_PARAM_ON" deck="left" channel="6" />
+	<button note="0x08" name="FX_RESET" deck="left" channel="6" />
+	<button note="0x09" name="FX_BEATS-" deck="left" channel="6" />
+	<button note="0x0A" name="FX_BEATS+" deck="left" channel="6" />
+	<encoder cc="0x01" name="FX_SELECT" sensitivity="0.2" deck="left" channel="6"/>
+	<encoder cc="0x02" name="FX_PARAM_1" sensitivity="0.2" deck="left" channel="6"/>
+	<encoder cc="0x03" name="FX_PARAM_2" sensitivity="0.2" deck="left" channel="6"/>
+	<encoder cc="0x04" name="FX_BEATS" sensitivity="0.2" deck="left" channel="6"/>
+	
+	<button note="0x06" name="FX_ON" deck="right" channel="7" />
+	<button note="0x07" name="FX_PARAM_ON" deck="right" channel="7" />
+	<button note="0x08" name="FX_RESET" deck="right" channel="7" />
+	<button note="0x09" name="FX_BEATS-" deck="right" channel="7" />
+	<button note="0x0A" name="FX_BEATS+" deck="right" channel="7" />
+	<encoder cc="0x01" name="FX_SELECT" sensitivity="0.2" deck="right" channel="7"/>
+	<encoder cc="0x02" name="FX_PARAM_1" sensitivity="0.2" deck="right" channel="7"/>
+	<encoder cc="0x03" name="FX_PARAM_2" sensitivity="0.2" deck="right" channel="7"/>
+	<encoder cc="0x04" name="FX_BEATS" sensitivity="0.2" deck="right" channel="7"/>
+	
+	<led note="0x06" zero="0x01" name="LED_FX_ON" default="FX_ON" deck="left" channel="6" />
+	<led note="0x07" zero="0x01" name="LED_FX_PARAM_ON" default="FX_PARAM_ON" deck="left" channel="6" />
+	<led note="0x08" zero="0x01" name="LED_FX_RESET" default="FX_RESET" deck="left" channel="6" />
+	<led note="0x09" zero="0x01" name="LED_FX_BEATS-" default="FX_BEATS-" deck="left" channel="6" />
+	<led note="0x0A" zero="0x01" name="LED_FX_BEATS+" default="FX_BEATS+" deck="left" channel="6" />
+	<led note="0x06" zero="0x01" name="LED_FX_ON" default="FX_ON" deck="right" channel="7" />
+	<led note="0x07" zero="0x01" name="LED_FX_PARAM_ON" default="FX_PARAM_ON" deck="right" channel="7" />
+	<led note="0x08" zero="0x01" name="LED_FX_RESET" default="FX_RESET" deck="right" channel="7" />
+	<led note="0x09" zero="0x01" name="LED_FX_BEATS-" default="FX_BEATS-" deck="right" channel="7" />
+	<led note="0x0A" zero="0x01" name="LED_FX_BEATS+" default="FX_BEATS+" deck="right" channel="7" />
+
+	
+<!-- DECK LEFT-->
+	<button note="0x09" name="CUE" deck="left" channel="4" />
+	<button note="0x0A" name="PLAY" deck="left" channel="4" />
+	<button note="0x08" name="SYNC" deck="left" channel="4" />
+	<button note="0x06" name="BEATJUMP-" deck="left" channel="4" />
+	<button note="0x07" name="BEATJUMP+" deck="left" channel="4" />
+	<button note="0x04" name="TRACKSKIP-" deck="left" channel="4" />
+	<button note="0x05" name="TRACKSKIP+" deck="left" channel="4" />
+	<button note="0x01" name="CENSOR" deck="left" channel="4" />
+	<button note="0x25" name="LOOPIN" deck="left" channel="4" />
+	<button note="0x26" name="LOOPOUT" deck="left" channel="4" />
+	<button note="0x27" name="LOOP_PUSH" deck="left" channel="4" />
+	<button note="0x24" name="SLIP" deck="left" channel="4" />
+	<button note="0x23" name="VINYL" deck="left" channel="4" />
+	<button note="0x22" name="KEYLOCK" deck="left" channel="4" />
+	<button note="0x1D" name="PITCHBEND-" deck="left" channel="4" />
+	<button note="0x1E" name="PITCHBEND+" deck="left" channel="4" />
+	<button note="0x1C" name="SHIFT" deck="left" channel="4" />
+	<button note="0x1B" name="BEATGRID_EDIT" deck="left" channel="4" />
+	<button note="0x19" name="BEATGRID-" deck="left" channel="4" />
+	<button note="0x1A" name="BEATGRID+" deck="left" channel="4" />
+	<button note="0x17" name="PARAMETER-" deck="left" channel="4" />
+	<button note="0x18" name="PARAMETER+" deck="left" channel="4" />
+	<button note="0x21" name="JOG_TOUCH" deck="left" channel="4" />
+
+	<slider cc="0x4B" ccmsb="0x1F" name="PITCH" deck="left" channel="4" />	
+	<fulljog cc="0x4D" name="JOG" full="960" deck="left" channel="4" />	
+	<encoder cc="0x20" name="LOOP_ENC" deck="left" channel="4"/>
+	
+	<led note="0x09" zero="0x01" name="LED_CUE" default="CUE" deck="left" channel="4" />
+	<led note="0x0A" zero="0x01" name="LED_PLAY" default="PLAY" deck="left" channel="4" />
+	<led note="0x08" zero="0x01" name="LED_SYNC" default="SYNC" deck="left" channel="4" />
+	<led note="0x06" zero="0x01" name="LED_BEATJUMP-" default="BEATJUMP-" deck="left" channel="4" />
+	<led note="0x07" zero="0x01" name="LED_BEATJUMP+" default="BEATJUMP+" deck="left" channel="4" />
+	<led note="0x04" zero="0x01" name="LED_TRACKSKIP-" default="TRACKSKIP-" deck="left" channel="4" />
+	<led note="0x05" zero="0x01" name="LED_TRACKSKIP+" default="TRACKSKIP+" deck="left" channel="4" />
+	<led note="0x01" zero="0x01" name="LED_CENSOR" default="CENSOR" deck="left" channel="4" />
+	<led note="0x25" zero="0x01" name="LED_LOOPIN" default="LOOPIN" deck="left" channel="4" />
+	<led note="0x26" zero="0x01" name="LED_LOOPOUT" default="LOOPOUT" deck="left" channel="4" />
+	<led note="0x24" zero="0x01" name="LED_SLIP" default="SLIP" deck="left" channel="4" />
+	<led note="0x23" zero="0x01" name="LED_VINYL" default="VINYL" deck="left" channel="4" />
+	<led note="0x22" zero="0x01" name="LED_KEYLOCK" default="KEYLOCK" deck="left" channel="4" />
+	<led note="0x1D" zero="0x01" name="LED_PITCHBEND-" default="PITCHBEND-" deck="left" channel="4" />
+	<led note="0x1E" zero="0x01" name="LED_PITCHBEND+" default="PITCHBEND+" deck="left" channel="4" />
+	<led note="0x1C" zero="0x01" name="LED_SHIFT" default="SHIFT" deck="left" channel="4" />
+	<led note="0x1B" zero="0x01" name="LED_BEATGRID_EDIT" default="BEATGRID_EDIT" deck="left" channel="4" />
+	<led note="0x19" zero="0x01" name="LED_BEATGRID-" default="BEATGRID-" deck="left" channel="4" />
+	<led note="0x1A" zero="0x01" name="LED_BEATGRID+" default="BEATGRID+" deck="left" channel="4" />
+	<led note="0x17" zero="0x01" name="LED_PARAMETER-" default="PARAMETER-" deck="left" channel="4" />
+	<led note="0x18" zero="0x01" name="LED_PARAMETER+" default="PARAMETER+" deck="left" channel="4" />
+	
+	<led note="0x2A" zero="0x01" name="LED_PITCH_ARROW_DOWN" deck="left" channel="4" />
+	<led note="0x2C" zero="0x01" name="LED_PITCH_ARROW_UP" deck="left" channel="4" />
+	<led note="0x2B" zero="0x01" name="LED_PITCH_ZERO" deck="left" channel="4" />
+	
+	<color note="0x21" name="LED_JOG_RING" deck="left" channel="4" />
+	
+	<!-- DECK LEFT PADS-->
+	<button note="0x0B" name="PADMODE_HOTCUE" deck="left" channel="4" />
+	<button note="0x0C" name="PADMODE_LOOP" deck="left" channel="4" />
+	<button note="0x0D" name="PADMODE_ROLL" deck="left" channel="4" />
+	<button note="0x0E" name="PADMODE_SLICER" deck="left" channel="4" />
+	
+	<button note="0x0F" name="PAD_1" deck="left" channel="4" />
+	<button note="0x10" name="PAD_2" deck="left" channel="4" />
+	<button note="0x11" name="PAD_3" deck="left" channel="4" />
+	<button note="0x12" name="PAD_4" deck="left" channel="4" />
+	<button note="0x13" name="PAD_5" deck="left" channel="4" />
+	<button note="0x14" name="PAD_6" deck="left" channel="4" />
+	<button note="0x15" name="PAD_7" deck="left" channel="4" />
+	<button note="0x16" name="PAD_8" deck="left" channel="4" />
+	
+	<color note="0x0B" name="LED_PADMODE_HOTCUE" deck="left" channel="4" />
+	<color note="0x0C" name="LED_PADMODE_LOOP" deck="left" channel="4" />
+	<color note="0x0D" name="LED_PADMODE_ROLL" deck="left" channel="4" />
+	<color note="0x0E" name="LED_PADMODE_SLICER" deck="left" channel="4" />
+	
+	<color note="0x0F" name="LED_PAD_1" deck="left" channel="4" />
+	<color note="0x10" name="LED_PAD_2" deck="left" channel="4" />
+	<color note="0x11" name="LED_PAD_3" deck="left" channel="4" />
+	<color note="0x12" name="LED_PAD_4" deck="left" channel="4" />
+	<color note="0x13" name="LED_PAD_5" deck="left" channel="4" />
+	<color note="0x14" name="LED_PAD_6" deck="left" channel="4" />
+	<color note="0x15" name="LED_PAD_7" deck="left" channel="4" />
+	<color note="0x16" name="LED_PAD_8" deck="left" channel="4" />
+	
+	
+	
+	
+<!-- DECK RIGHT-->
+	<button note="0x09" name="CUE" deck="right" channel="5" />
+	<button note="0x0A" name="PLAY" deck="right" channel="5" />
+	<button note="0x08" name="SYNC" deck="right" channel="5" />
+	<button note="0x06" name="BEATJUMP-" deck="right" channel="5" />
+	<button note="0x07" name="BEATJUMP+" deck="right" channel="5" />
+	<button note="0x04" name="TRACKSKIP-" deck="right" channel="5" />
+	<button note="0x05" name="TRACKSKIP+" deck="right" channel="5" />
+	<button note="0x01" name="CENSOR" deck="right" channel="5" />
+	<button note="0x25" name="LOOPIN" deck="right" channel="5" />
+	<button note="0x26" name="LOOPOUT" deck="right" channel="5" />
+	<button note="0x27" name="LOOP_PUSH" deck="right" channel="5" />
+	<button note="0x24" name="SLIP" deck="right" channel="5" />
+	<button note="0x23" name="VINYL" deck="right" channel="5" />
+	<button note="0x22" name="KEYLOCK" deck="right" channel="5" />
+	<button note="0x1D" name="PITCHBEND-" deck="right" channel="5" />
+	<button note="0x1E" name="PITCHBEND+" deck="right" channel="5" />
+	<button note="0x1C" name="SHIFT" deck="right" channel="5" />
+	<button note="0x1B" name="BEATGRID_EDIT" deck="right" channel="5" />
+	<button note="0x19" name="BEATGRID-" deck="right" channel="5" />
+	<button note="0x1A" name="BEATGRID+" deck="right" channel="5" />
+	<button note="0x17" name="PARAMETER-" deck="right" channel="5" />
+	<button note="0x18" name="PARAMETER+" deck="right" channel="5" />
+	<button note="0x21" name="JOG_TOUCH" deck="right" channel="5" />
+
+	<slider cc="0x4B" ccmsb="0x1F" name="PITCH" deck="right" channel="5" />	
+	<fulljog cc="0x4D" name="JOG" full="960" deck="right" channel="5" />	
+	<encoder cc="0x20" name="LOOP_ENC" deck="right" channel="5"/>
+	
+	<led note="0x09" zero="0x01" name="LED_CUE" default="CUE" deck="right" channel="5" />
+	<led note="0x0A" zero="0x01" name="LED_PLAY" default="PLAY" deck="right" channel="5" />
+	<led note="0x08" zero="0x01" name="LED_SYNC" default="SYNC" deck="right" channel="5" />
+	<led note="0x06" zero="0x01" name="LED_BEATJUMP-" default="BEATJUMP-" deck="right" channel="5" />
+	<led note="0x07" zero="0x01" name="LED_BEATJUMP+" default="BEATJUMP+" deck="right" channel="5" />
+	<led note="0x04" zero="0x01" name="LED_TRACKSKIP-" default="TRACKSKIP-" deck="right" channel="5" />
+	<led note="0x05" zero="0x01" name="LED_TRACKSKIP+" default="TRACKSKIP+" deck="right" channel="5" />
+	<led note="0x01" zero="0x01" name="LED_CENSOR" default="CENSOR" deck="right" channel="5" />
+	<led note="0x25" zero="0x01" name="LED_LOOPIN" default="LOOPIN" deck="right" channel="5" />
+	<led note="0x26" zero="0x01" name="LED_LOOPOUT" default="LOOPOUT" deck="right" channel="5" />
+	<led note="0x24" zero="0x01" name="LED_SLIP" default="SLIP" deck="right" channel="5" />
+	<led note="0x23" zero="0x01" name="LED_VINYL" default="VINYL" deck="right" channel="5" />
+	<led note="0x22" zero="0x01" name="LED_KEYLOCK" default="KEYLOCK" deck="right" channel="5" />
+	<led note="0x1D" zero="0x01" name="LED_PITCHBEND-" default="PITCHBEND-" deck="right" channel="5" />
+	<led note="0x1E" zero="0x01" name="LED_PITCHBEND+" default="PITCHBEND+" deck="right" channel="5" />
+	<led note="0x1C" zero="0x01" name="LED_SHIFT" default="SHIFT" deck="right" channel="5" />
+	<led note="0x1B" zero="0x01" name="LED_BEATGRID_EDIT" default="BEATGRID_EDIT" deck="right" channel="5" />
+	<led note="0x19" zero="0x01" name="LED_BEATGRID-" default="BEATGRID-" deck="right" channel="5" />
+	<led note="0x1A" zero="0x01" name="LED_BEATGRID+" default="BEATGRID+" deck="right" channel="5" />
+	<led note="0x17" zero="0x01" name="LED_PARAMETER-" default="PARAMETER-" deck="right" channel="5" />
+	<led note="0x18" zero="0x01" name="LED_PARAMETER+" default="PARAMETER+" deck="right" channel="5" />
+	
+	<led note="0x2A" zero="0x01" name="LED_PITCH_ARROW_DOWN" deck="right" channel="5" />
+	<led note="0x2C" zero="0x01" name="LED_PITCH_ARROW_UP" deck="right" channel="5" />
+	<led note="0x2B" zero="0x01" name="LED_PITCH_ZERO" deck="right" channel="5" />
+	
+	<color note="0x21" name="LED_JOG_RING" deck="right" channel="5" />
+	
+	<!-- DECK RIGHT PADS-->
+	<button note="0x0B" name="PADMODE_HOTCUE" deck="right" channel="5" />
+	<button note="0x0C" name="PADMODE_LOOP" deck="right" channel="5" />
+	<button note="0x0D" name="PADMODE_ROLL" deck="right" channel="5" />
+	<button note="0x0E" name="PADMODE_SLICER" deck="right" channel="5" />
+	
+	<button note="0x0F" name="PAD_1" deck="right" channel="5" />
+	<button note="0x10" name="PAD_2" deck="right" channel="5" />
+	<button note="0x11" name="PAD_3" deck="right" channel="5" />
+	<button note="0x12" name="PAD_4" deck="right" channel="5" />
+	<button note="0x13" name="PAD_5" deck="right" channel="5" />
+	<button note="0x14" name="PAD_6" deck="right" channel="5" />
+	<button note="0x15" name="PAD_7" deck="right" channel="5" />
+	<button note="0x16" name="PAD_8" deck="right" channel="5" />
+	
+	<color note="0x0B" name="LED_PADMODE_HOTCUE" deck="right" channel="5" />
+	<color note="0x0C" name="LED_PADMODE_LOOP" deck="right" channel="5" />
+	<color note="0x0D" name="LED_PADMODE_ROLL" deck="right" channel="5" />
+	<color note="0x0E" name="LED_PADMODE_SLICER" deck="right" channel="5" />
+	
+	<color note="0x0F" name="LED_PAD_1" deck="right" channel="5" />
+	<color note="0x10" name="LED_PAD_2" deck="right" channel="5" />
+	<color note="0x11" name="LED_PAD_3" deck="right" channel="5" />
+	<color note="0x12" name="LED_PAD_4" deck="right" channel="5" />
+	<color note="0x13" name="LED_PAD_5" deck="right" channel="5" />
+	<color note="0x14" name="LED_PAD_6" deck="right" channel="5" />
+	<color note="0x15" name="LED_PAD_7" deck="right" channel="5" />
+	<color note="0x16" name="LED_PAD_8" deck="right" channel="5" />
+	
+	<!-- MIC - MASTER-->
+	<button note="0x23" name="MIC_TALKOVER" channel="15" />
+	<button note="0x24" name="MIC1_ON" channel="15" />
+	<button note="0x25" name="MIC2_ON" channel="15" />
+	<led note="0x23" name="LED_MIC_TALKOVER" default="MIC_TALKOVER" channel="15" />
+	<led note="0x24" name="LED_MIC1_ON" default="MIC1_ON" channel="15" />
+	<led note="0x24" name="LED_MIC2_ON" default="MIC2_ON" channel="15" />
+	<slider cc="0x28" name="MIC1_LEVEL" channel="15" />
+	<slider cc="0x2B" name="MIC1_LOW" zero="0x40" channel="15" />
+	<slider cc="0x2A" name="MIC1_MID" zero="0x40" channel="15" />
+	<slider cc="0x29" name="MIC1_HIGH" zero="0x40" channel="15" />
+	<slider cc="0x2C" name="MIC2_LEVEL" channel="15" />
+	<slider cc="0x2D" name="MIC2_LOW" zero="0x40" channel="15" />
+	<slider cc="0x2E" name="MIC2_MID" zero="0x40" channel="15" />
+	<slider cc="0x2F" name="MIC2_HIGH" zero="0x40" channel="15" />
+	<button note="0x26" name="MIC1_ECHO" zero="0x40" channel="15" />
+	<button note="0x27" name="MIC2_ECHO" zero="0x40" channel="15" />
+	
+	<slider cc="0x1A" name="XFADER_CONTOUR" channel="15" />
+	<slider cc="0x0F" name="MASTER_LEVEL" channel="15" />
+	<slider cc="0x30" name="BOOTH_LEVEL" channel="15" />
+	<slider cc="0x32" name="BOOTH_LOW" zero="0x40" channel="15" />
+	<slider cc="0x31" name="BOOTH_HIGH" zero="0x40" channel="15" />
+	<slider cc="0x11" name="ZONE_LEVEL" channel="15" />
+	<slider cc="0x13" name="ZONE_LOW" zero="0x40" channel="15" />
+	<slider cc="0x12" name="ZONE_HIGH" zero="0x40" channel="15" />
+	<button note="0x10" name="ZONE_CHASSIGN" channel="15" />
+	<led note="0x10" name="LED_ZONE_CHASSIGN" default="ZONE_CHASSIGN" channel="15" />
+	<button note="0x14" name="USB_EJECT" channel="15" />
+	<led note="0x14" name="LED_USB_EJECT" default="USB_EJECT" channel="15" />
+	
+	<!-- BROWSER MIXER GLOBAL-->
+	<button note="0x01" name="LOAD_LEFT" channel="15" />
+	<button note="0x02" name="LOAD_RIGHT" channel="15" />
+	<button note="0x03" name="BACK" channel="15" />
+	<button note="0x04" name="FWD" channel="15" />
+	<button note="0x06" name="BROWSE_PUSH" channel="15" />
+	<button note="0x07" name="VIEW" channel="15" />
+	<button note="0x0B" name="SPLIT" channel="15" />
+	<button note="0x0C" name="CF_FILTER" channel="15" />
+	<button note="0x0D" name="CF_ECHO" channel="15" />
+	<button note="0x0E" name="CF_WASH" channel="15" />
+	<button note="0x0F" name="CF_NOISE" channel="15" />
+	
+	<encoder cc="0x05" name="BROWSE" channel="15" />
+
+	<slider cc="0x0E" name="CROSSFADER" channel="15" />
+	<slider cc="0x0A" name="CUE_VOLUME" channel="15" />
+	<slider cc="0x09" name="CUE_MIX" channel="15" />
+	
+	<led note="0x06" zero="0x01" name="LED_BROWSE" channel="15" />
+	<color note="0x01" name="LED_LOAD_LEFT" channel="15" />
+	<color note="0x02" name="LED_LOAD_RIGHT" channel="15" />
+	<led note="0x03" zero="0x01" name="LED_BACK" default="BACK" channel="15" />
+	<led note="0x04" zero="0x01" name="LED_FWD" default="FWD" channel="15" />
+	<led note="0x07" zero="0x01" name="LED_VIEW" default="VIEW" channel="15" />
+	
+	<led note="0x0B" zero="0x01" name="LED_SPLIT" default="SPLIT" channel="15" />
+	<led note="0x0C" zero="0x01" name="LED_CF_FILTER" default="CF_FILTER" channel="15" />
+	<led note="0x0D" zero="0x01" name="LED_CF_ECHO" default="CF_ECHO" channel="15" />
+	<led note="0x0E" zero="0x01" name="LED_CF_WASH" default="CF_WASH" channel="15" />
+	<led note="0x0F" zero="0x01" name="LED_CF_NOISE" default="CF_NOISE" channel="15" />
+	
+	<!-- MIXER-->
+	<slider cc="0x03" name="GAIN" deck="1" channel="0" />
+	<slider cc="0x04" name="EQ_HIGH" zero="0x40" deck="1" channel="0" />
+	<slider cc="0x06" name="EQ_MID" zero="0x40" deck="1" channel="0" />
+	<slider cc="0x08" name="EQ_LOW" zero="0x40" deck="1" channel="0" />
+	<slider cc="0x0B" name="FILTER" zero="0x40" deck="1" channel="0" />
+	<slider cc="0x0E" name="VOLUME" deck="1" channel="0" />
+	
+	<slider cc="0x03" name="GAIN" deck="2" channel="1" />
+	<slider cc="0x04" name="EQ_HIGH" zero="0x40" deck="2" channel="1" />
+	<slider cc="0x06" name="EQ_MID" zero="0x40" deck="2" channel="1" />
+	<slider cc="0x08" name="EQ_LOW" zero="0x40" deck="2" channel="1" />
+	<slider cc="0x0B" name="FILTER" zero="0x40" deck="2" channel="1" />
+	<slider cc="0x0E" name="VOLUME" deck="2" channel="1" />
+	
+	<slider cc="0x03" name="GAIN" deck="3" channel="2" />
+	<slider cc="0x04" name="EQ_HIGH" zero="0x40" deck="3" channel="2" />
+	<slider cc="0x06" name="EQ_MID" zero="0x40" deck="3" channel="2" />
+	<slider cc="0x08" name="EQ_LOW" zero="0x40" deck="3" channel="2" />
+	<slider cc="0x0B" name="FILTER" zero="0x40" deck="3" channel="2" />
+	<slider cc="0x0E" name="VOLUME" deck="3" channel="2" />
+	
+	<slider cc="0x03" name="GAIN" deck="4" channel="3" />
+	<slider cc="0x04" name="EQ_HIGH" zero="0x40" deck="4" channel="3" />
+	<slider cc="0x06" name="EQ_MID" zero="0x40" deck="4" channel="3" />
+	<slider cc="0x08" name="EQ_LOW" zero="0x40" deck="4" channel="3" />
+	<slider cc="0x0B" name="FILTER" zero="0x40" deck="4" channel="3" />
+	<slider cc="0x0E" name="VOLUME" deck="4" channel="3" />
+
+	<button note="0x0D" name="PFL" deck="1" channel="0" />
+	<button note="0x0D" name="PFL" deck="2" channel="1" />
+	<button note="0x0D" name="PFL" deck="3" channel="2" />
+	<button note="0x0D" name="PFL" deck="4" channel="3" />
+	<color note="0x0D" name="LED_PFL" deck="1" channel="0" />
+	<color note="0x0D" name="LED_PFL" deck="2" channel="1" />
+	<color note="0x0D" name="LED_PFL" deck="3" channel="2" />
+	<color note="0x0D" name="LED_PFL" deck="4" channel="3" />
+	
+	<button note="0x0F" value="0x02" name="CF_ASSIGN_RIGHT" deck="1" channel="0" />
+	<button note="0x0F" inverted="true" name="CF_ASSIGN_LEFT" deck="1" channel="0" />
+	<button note="0x0F" value="0x01" name="CF_ASSIGN_THRU" deck="1" channel="0" />
+	<button note="0x0F" value="0x02" name="CF_ASSIGN_RIGHT" deck="2" channel="1" />
+	<button note="0x0F" inverted="true"  name="CF_ASSIGN_LEFT" deck="2" channel="1" />
+	<button note="0x0F" value="0x01" name="CF_ASSIGN_THRU" deck="2" channel="1" />
+	<button note="0x0F" value="0x02" name="CF_ASSIGN_RIGHT" deck="3" channel="2" />
+	<button note="0x0F" inverted="true"  name="CF_ASSIGN_LEFT" deck="3" channel="2" />
+	<button note="0x0F" value="0x01" name="CF_ASSIGN_THRU" deck="3" channel="2" />
+	<button note="0x0F" value="0x02" name="CF_ASSIGN_RIGHT" deck="4" channel="3" />
+	<button note="0x0F" inverted="true"  name="CF_ASSIGN_LEFT" deck="4" channel="3" />
+	<button note="0x0F" value="0x01" name="CF_ASSIGN_THRU" deck="4" channel="3" />
+	
+		
+	<button note="0x01" name="FX_ASSIGN_1" deck="1" channel="0" />
+	<button note="0x02" name="FX_ASSIGN_2" deck="1" channel="0" />
+	<button note="0x01" name="FX_ASSIGN_1" deck="2" channel="1" />
+	<button note="0x02" name="FX_ASSIGN_2" deck="2" channel="1" />
+	<button note="0x01" name="FX_ASSIGN_1" deck="3" channel="2" />
+	<button note="0x02" name="FX_ASSIGN_2" deck="3" channel="2" />
+	<button note="0x01" name="FX_ASSIGN_1" deck="4" channel="3" />
+	<button note="0x02" name="FX_ASSIGN_2" deck="4" channel="3" />
+	
+	<led note="0x01" zero="0x01" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="1" channel="0" />
+	<led note="0x02" zero="0x01" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="1" channel="0" />
+	<led note="0x01" zero="0x01" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="2" channel="1" />
+	<led note="0x02" zero="0x01" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="2" channel="1" />
+	<led note="0x01" zero="0x01" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="3" channel="2" />
+	<led note="0x02" zero="0x01" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="3" channel="2" />
+	<led note="0x01" zero="0x01" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="4" channel="3" />
+	<led note="0x02" zero="0x01" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="4" channel="3" />
+
+
+	<button note="0x15" value="0x01" name="LINE_INPUT" deck="3" channel="15" />
+	<button note="0x16" value="0x01" name="LINE_INPUT" deck="1" channel="15" />
+	<button note="0x17" value="0x01" name="LINE_INPUT" deck="2" channel="15" />
+	<button note="0x18" value="0x01" name="LINE_INPUT" deck="4" channel="15" />
+	<button note="0x15" inverted="true" name="USB_INPUT" deck="3" channel="15" />
+	<button note="0x16" inverted="true" name="USB_INPUT" deck="1" channel="15" />
+	<button note="0x17" inverted="true" name="USB_INPUT" deck="2" channel="15" />
+	<button note="0x18" inverted="true" name="USB_INPUT" deck="4" channel="15" />
+	
+	<toggle note="0x19" name="FADER_START" deck="1" channel="15" />
+	<toggle note="0x19" name="FADER_START" deck="3" channel="15" />
+	<toggle note="0x1B" name="FADER_START" deck="2" channel="15" />
+	<toggle note="0x1B" name="FADER_START" deck="4" channel="15" />
+	
+	<!-- OLEDS  F0 00 02 0B 00 08 08 00 0E (to follow) 01(ID) 01 (size 0,1,2,3) 01 (hor align) 00 (vertical position 00,01,02)      44 65 63 61 79 20 54 69 6D 65 F7 -->
+	<text sysex="F000020B0008090009007D02000100030000F7">
+		<digit name="DSP1_LINE2" offset="17" nbbits="7" multiply="127" deck="left" />
+		<digit name="DSP1_BAR_ENABLE" offset="12" nbbits="7" deck="left" />
+	</text>
+	<text sysex="F000020B0008090009017D02000100030000F7">
+		<digit name="DSP2_LINE2" offset="17" nbbits="7" multiply="127" deck="left" />
+		<digit name="DSP2_BAR_ENABLE" offset="12" nbbits="7" deck="left" />
+	</text>
+	<text sysex="F000020B0008090009027D02000100030000F7">
+		<digit name="DSP3_LINE2" offset="17" nbbits="7" multiply="127" deck="left" />
+		<digit name="DSP3_BAR_ENABLE" offset="12" nbbits="7" deck="left" />
+	</text>
+	<text sysex="F000020B0008090009037D02000100030000F7">
+		<digit name="DSP4_LINE2" offset="17" nbbits="7" multiply="127" deck="left" />
+		<digit name="DSP4_BAR_ENABLE" offset="12" nbbits="7" deck="left" />
+	</text>
+	
+	<text sysex="F000020B0008080012000201000000000000000000000000000000F7">
+		<sysex name="DSP1_LINE1" encoding="ascii" offset="13" size="14" deck="left" scroll="no" />
+	</text>
+	<text sysex="F000020B0008080012010201000000000000000000000000000000F7">
+		<sysex name="DSP2_LINE1" encoding="ascii" offset="13" size="14" deck="left" scroll="no" />
+	</text>
+
+	<text sysex="F000020B0008080012020201000000000000000000000000000000F7">
+		<sysex name="DSP3_LINE1" encoding="ascii" offset="13" size="14" deck="left" scroll="no" />
+	</text>
+	<text sysex="F000020B0008080012030201000000000000000000000000000000F7">
+		<sysex name="DSP4_LINE1" encoding="ascii" offset="13" size="14" deck="left" scroll="no" />
+	</text>
+	
+	<text sysex="F000020B0008090009047D02000100030000F7">
+		<digit name="DSP1_LINE2" offset="17" nbbits="7" multiply="127" deck="right" />
+		<digit name="DSP1_BAR_ENABLE" offset="12" nbbits="7" deck="right" />
+	</text>
+	<text sysex="F000020B0008090009057D02000100030000F7">
+		<digit name="DSP2_LINE2" offset="17" nbbits="7" multiply="127" deck="right" />
+		<digit name="DSP2_BAR_ENABLE" offset="12" nbbits="7" deck="right" />
+	</text>
+	<text sysex="F000020B0008090009067D02000100030000F7">
+		<digit name="DSP3_LINE2" offset="17" nbbits="7" multiply="127" deck="right" />
+		<digit name="DSP3_BAR_ENABLE" offset="12" nbbits="7" deck="right" />
+	</text>
+	<text sysex="F000020B0008090009077D02000100030000F7">
+		<digit name="DSP4_LINE2" offset="17" nbbits="7" multiply="127" deck="right" />
+		<digit name="DSP4_BAR_ENABLE" offset="12" nbbits="7" deck="right" />
+	</text>
+
+	<text sysex="F000020B0008080012040201000000000000000000000000000000F7">
+		<sysex name="DSP1_LINE1" encoding="ascii" offset="13" size="14" deck="right" scroll="no" />
+	</text>
+	<text sysex="F000020B0008080012050201000000000000000000000000000000F7">
+		<sysex name="DSP2_LINE1" encoding="ascii" offset="13" size="14" deck="right" scroll="no" />
+	</text>
+	<text sysex="F000020B0008080012060201000000000000000000000000000000F7">
+		<sysex name="DSP3_LINE1" encoding="ascii" offset="13" size="14" deck="right" scroll="no" />
+	</text>
+	<text sysex="F000020B0008080012070201000000000000000000000000000000F7">
+		<sysex name="DSP4_LINE1" encoding="ascii" offset="13" size="14" deck="right" scroll="no" />
+	</text>
+
+	<!-- Clear OLDEs -->
+	<exit sendsysex="F000020B00080A0007000003007F0000F7"/>
+	<exit sendsysex="F000020B00080A0007010003007F0000F7"/>
+	<exit sendsysex="F000020B00080A0007020003007F0000F7"/>
+	<exit sendsysex="F000020B00080A0007030003007F0000F7"/>
+	<exit sendsysex="F000020B00080A0007040003007F0000F7"/>
+	<exit sendsysex="F000020B00080A0007050003007F0000F7"/>
+	<exit sendsysex="F000020B00080A0007060003007F0000F7"/>
+	<exit sendsysex="F000020B00080A0007070003007F0000F7"/>
+	 
+
+</device>

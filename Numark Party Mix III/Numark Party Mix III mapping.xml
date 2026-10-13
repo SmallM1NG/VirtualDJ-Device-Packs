@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper device="NMPARTY3" author="Atomix Productions" version="850" date="2021-02-06">
+	<map value="ONINIT" action="fake_hp on &amp; fake_master on" />
+	<map value="ONEXIT" action="fake_hp off &amp; fake_master off" />
+	<map value="SHIFT" action="shift" />
+	<map value="PLAY" action="play_button" />
+	<map value="SHIFT_PLAY" action="play_stutter" />
+	<map value="LED_PLAY" action="pioneer_play" />
+	<map value="CUE" action="cue_button" />
+	<map value="SHIFT_CUE" action="goto_start" />
+	<map value="LED_CUE" action="pioneer_cue" />
+	<map value="SYNC" action="sync" />
+	<map value="LED_SYNC" action="pitch_reset ? blink : is_sync" />
+	<map value="SHIFT_SYNC" action="pitch_reset" />
+	<map value="VOLUME" action="volume" />
+	<map value="EQ_HIGH" action="eq_high" />
+	<map value="EQ_MID" action="eq_mid" />
+	<map value="EQ_LOW" action="eq_low" />
+	<map value="FILTER" action="filter" />
+	<map value="PFL" action="pfl" />
+	<map value="FADE_FX" action="effect_mixfx_activate" />
+	<map value="SHIFT_FADE_FX" action="effect_mixfx_select" />
+	<map value="CROSSFADER" action="crossfader" />
+	<map value="MASTER_VOLUME" action="master_volume" />
+	<map value="HEADPHONES_VOLUME" action="headphone_volume" />
+	<map value="PITCH" action="pitch" />
+	<map value="JOG" action="touchwheel" />
+	<map value="JOG_TOUCH" action="touchwheel_touch" />
+	<map value="SHIFT_JOG" action="touchwheel &apos;search&apos;" />
+	<map value="SHIFT_JOG_TOUCH" action="touchwheel_touch &apos;search&apos;" />
+	<map value="ACAPELLA" action="stem_pad &apos;acapella&apos;"/>
+	<map value="INSTRUMENTAL" action="stem_pad &apos;instrumental&apos;"/>
+	<map value="SHIFT_ACAPELLA" action="padfx &apos;echo out&apos; 80% 1bt &apos;stemfx:MeloRhythm&apos;" />
+	<map value="SHIFT_INSTRUMENTAL" action="padfx &apos;echo out&apos; 80% 1bt &apos;stemfx:Vocal&apos;" />
+	<map value="BROWSE" action="browser_scroll" />
+	<map value="SHIFT_BROWSE" action="param_bigger 0 ? browser_scroll +10 : browser_scroll -10" />
+	<map value="BROWSE_PUSH" action="holding ? browser_window &apos;folders&apos; ? browser_folder : browser_window &apos;songs&apos; : browser_window &apos;folders&apos; ? browser_enter : browser_window &apos;folders&apos;" />
+	<map value="SHIFT_BROWSE_PUSH" action="browser_window &apos;sideview&apos; ? sideview +1 : browser_window &apos;sideview&apos;"/>
+	<map value="LOAD" action="doubleclick ? clone_from_deck : load" />
+	<map value="LED_LOAD" action="load_pulse 1000ms ? on : loaded ? blink 250ms : off" />
+	<map value="SHIFT_LOAD" action="playlist_add" />
+	<map value="LED_BEAT_ALIGN_FW" action="not masterdeck ? deck right play ? deck left play ? get_beatdiff &amp; param_bigger 52% ? on : off" />
+	<map value="LED_BEAT_ALIGN_REV" action="not masterdeck ? deck right play ? deck left play ? get_beatdiff &amp; param_smaller 48% ? on : off" />
+	<map value="LED_BEAT_ALIGN_CENTER" action="deck left play ? deck right play ? param_smaller `get_beatdiff` 48% ? param_bigger `get_beatdiff` 52% ? on : off" />
+	<map value="PADS_MODE" action="pad_page 4 ? pad_page 12 : pad_page +1" />
+	<map value="LED_MODE1" action="shift ? off : pad_page 3 ? off : pad_page 1" />
+	<map value="LED_MODE2" action="shift ? off : pad_page 3 ? on : pad_page 2" />
+	<map value="LED_MODE3" action="shift ? off : pad_page 3 ? on : pad_page 4" />
+	<map value="LED_MODE4" action="shift ? off : pad_page 3 ? off : pad_page 12" />
+	<map value="PAD1" action="pad 1" />
+	<map value="PAD2" action="pad 2" />
+	<map value="PAD3" action="pad 3" />
+	<map value="PAD4" action="pad 4" />
+	<map value="PAD5" action="pad 5" />
+	<map value="PAD6" action="pad 6" />
+	<map value="PAD7" action="pad 7" />
+	<map value="PAD8" action="pad 8" />
+	<map value="SHIFT_PAD1" action="padshift 1" />
+	<map value="SHIFT_PAD2" action="padshift 2" />
+	<map value="SHIFT_PAD3" action="padshift 3" />
+	<map value="SHIFT_PAD4" action="padshift 4" />	
+	<map value="SHIFT_PAD5" action="padshift 5" />
+	<map value="SHIFT_PAD6" action="padshift 6" />
+	<map value="SHIFT_PAD7" action="padshift 7" />
+	<map value="SHIFT_PAD8" action="padshift 8" />
+	<map value="PBALL_MODE_OFF" action="set &apos;$ballmode&apos; 0"/>
+	<map value="PBALL_MODE_1" action="set &apos;$ballmode&apos; 1"/>	
+	<map value="PBALL_MODE_2" action="set &apos;$ballmode&apos; 2"/>	
+	<map value="PBALL_MODE_3" action="set &apos;$ballmode&apos; 3"/>	
+	<map value="PBALL_MODE_4" action="set &apos;$ballmode&apos; 4"/>	
+	<map value="PBALL_RED" action="var &apos;$ballmode&apos; 1 ? var &apos;@$PMprogram&apos; 2 ? get_vu_meter &apos;master&apos; : var &apos;@$PMprogram&apos; 1 ? deck left masterdeck ? deck left get_beat_num 2 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : deck left get_beat_num 1 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : constant 0.0 : deck right get_beat_num 2 ? deck right param_bigger 70% get_beatgrid ? constant 1 : constant 0 : deck left get_beat_num 1 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : constant 0.0 : deck left masterdeck ? deck left get_beat_num 2 ? constant 1 : deck left get_beat_num 1 ? constant 1 : constant 0 : deck right get_beat_num 2 ? constant 1 : deck right get_beat_num 1 ? constant 1 : constant 0 : nothing" />
+	<map value="PBALL_GREEN" action="var &apos;$ballmode&apos; 1 ? var &apos;@$PMprogram&apos; 2 ? get_vu_meter &apos;master&apos; : var &apos;@$PMprogram&apos; 1 ? deck left masterdeck ? deck left get_beat_num 3 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : deck left get_beat_num 1 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : constant 0.0 : deck right get_beat_num 3 ? deck right param_bigger 70% get_beatgrid ? constant 1 : constant 0 : deck left get_beat_num 1 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : constant 0.0 : deck left masterdeck ? deck left get_beat_num 3 ? constant 1 : deck left get_beat_num 1 ? constant 1 : constant 0 : deck right get_beat_num 3 ? constant 1 : deck right get_beat_num 1 ? constant 1 : constant 0 : nothing" />
+	<map value="PBALL_BLUE" action="var &apos;$ballmode&apos; 1 ? var &apos;@$PMprogram&apos; 2 ? get_vu_meter &apos;master&apos; : var &apos;@$PMprogram&apos; 1 ? deck left masterdeck ? deck left get_beat_num 4 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : deck left get_beat_num 1 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : constant 0.0 : deck right get_beat_num 4 ? deck right param_bigger 70% get_beatgrid ? constant 1 : constant 0 : deck left get_beat_num 1 ? deck left param_bigger 70% get_beatgrid ? constant 1 : constant 0 : constant 0.0 : deck left masterdeck ? deck left get_beat_num 4 ? constant 1 : deck left get_beat_num 1 ? constant 1 : constant 0 : deck right get_beat_num 4 ? constant 1 : deck right get_beat_num 1 ? constant 1 : constant 0 : nothing" />
+	<map value="PBALL_AUTO" action="var &apos;$ballmode&apos; 2 ? deck left masterdeck ? deck left get_beatgrid 100% : deck right get_beatgrid 100% : nothing" />
+</mapper>

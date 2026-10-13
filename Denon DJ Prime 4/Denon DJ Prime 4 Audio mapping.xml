@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper device="DNPRIME4A" version="850" date="2023-10-31">
+	<map value="USB_OUTPUT_LEVEL" action="setting &apos;USBMasterDBLevel&apos;" />
+	<map value="USB_INPUT_LEVEL" action="setting &apos;USBRecordDBLevel&apos;" />
+	<map value="USB_HP_LEVEL" action="setting &apos;USBHeadphonesDBLevel&apos;" />
+</mapper>

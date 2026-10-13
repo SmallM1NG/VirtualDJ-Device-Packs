@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper device="DNPRIME4LW" author="Atomix Productions" version="850" date="2020-09-08">
+	<info>https://www.virtualdj.com/manuals/hardware/denon/prime4.html</info>
+	<map value="LCD_READY" action="set &apos;$primeleft_ready&apos; 1" />
+	<map value="SLIP_POSITION_ENABLE" action="loaded ? slip_mode ? constant 1 : get_slip_active ? constant 1" />
+	<map value="ENGINELOGO_COLOR" action="color &apos;gray&apos;" />
+	<map value="SLIPRING_COLOR" action="color &apos;#000000&apos; " />
+	<map value="SLIPPOS_COLOR" action="color &apos;darkred&apos;" />
+	<map value="PLATTER_POSITION" action="get_rotation" />
+	<map value="SLIP_POSITION" action="get_slip_active ? get_rotation_slip : slip_mode ? get_slip_active ? get_rotation_slip : get_rotation" />
+	<map value="SLIP_INDICATOR_ENABLE" action="loaded ? get_slip_active ? constant 1 : slip_mode ? constant 1" />
+	<map value="POSITIONRING_COLOR" action="loaded ? color &apos;white&apos;" />
+	<map value="LOOPTEXT_COLOR" action="var &apos;$deckleftselect&apos; ? deck 1 leftdeck ? color &apos;marine&apos; : deck 3 leftdeck ? color &apos;green&apos; : color &apos;white&apos; : loop ? color &apos;white&apos; :  color &apos;gray&apos;" />
+	<map value="ALBUMARTWORK_ENABLE" action="var &apos;@$denonshowjogalbum&apos; 0 ? constant 1 : constant 0" />
+	<map value="LOOPTEXT_ENABLE" action="loop ? constant 1.0 : is_using &apos;loopsize&apos; inaudible ? constant 1.0 : var &apos;$deckleftselect&apos; ? constant 1.0 : constant 0.0" />
+	<map value="LOOPTEXT" action="var &apos;$deckleftselect&apos; ? deck 3 leftdeck ? constant 16 : constant 6 : loop ? loop_select 1 ? constant 6 : loop_select 2 ? constant 7 : loop_select 4 ? constant 8 : loop_select 8 ? constant 9 : loop_select 16 ? constant 10 : loop_select 32 ? constant 11 : loop_select 64 ? constant 12 : loop_select 0.5 ? constant 5 : loop_select 0.25 ? constant 4 : loop_select 0.125 ? constant 3 : loop_select 0.0625 ? constant 2 : loop_select 0.03125 ? constant 1 : loop_select 0.015625 ? constant 0 : constant 13 : is_using &apos;loopsize&apos; inaudible ? loop_select 1 ? constant 6 : loop_select 2 ? constant 7 : loop_select 4 ? constant 8 : loop_select 8 ? constant 9 : loop_select 16 ? constant 10 : loop_select 32 ? constant 11 : loop_select 64 ? constant 12 : loop_select 0.5 ? constant 5 : loop_select 0.25 ? constant 4 : loop_select 0.125 ? constant 3 : loop_select 0.0625 ? constant 2 : loop_select 0.03125 ? constant 1 : loop_select 0.015625 ? constant 0 : constant 13" />
+	<map value="DENONLOGO_ENABLE" action="constant 0" />
+	<map value="ALBUM_INDEX" action="var &apos;$primeleft_ready&apos; ? action_deck 1 ? constant 1.0 : action_deck 3 ? constant 2.0 : constant 0.0" />
+	<map value="ALBUMART_ALPHA" action="var &apos;$deckleftselect&apos; ? constant 6.0 : loop ? constant 5.0 : is_using &apos;loopsize&apos; inaudible ? constant 5.0 : constant 255" />
+	<map value="LCD_BRIGHTNESS" action="param_multiply -12.7 `get_var &apos;@$prime4_brightness&apos;` &amp; param_add 127" />
+	<map value="ENGINELOGO_ENABLE" action="constant 0" />
+	<map value="JOG_POSITION_ENABLE" action="loaded ? constant 1 : constant 0" />
+	<map value="LCD_ALBUM" action="var &apos;$primeleft_ready&apos; ? deck 1 get_controller_image &apos;circle&apos; 198" />
+	<map value="LCD_ALBUM2" action="var &apos;$primeleft_ready&apos; ? deck 3 get_controller_image &apos;circle&apos; 198" />
+</mapper>
