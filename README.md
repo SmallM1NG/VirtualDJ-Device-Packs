@@ -1,2 +1,2 @@
-# VirtualDJ-Device-Packs
-VirtualDJ Device Packs
+# 这是我整理搜集的一些VirtualDJ Device Pack
+在仓库中找你需要的设备的文件夹 内部应该有三个文件 保持文件夹名称全部下载 按照你的VirtualDJ版本放置在数据目录下的Devices文件夹中即可使用
