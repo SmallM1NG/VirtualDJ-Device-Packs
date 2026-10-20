@@ -20,7 +20,7 @@
 
 将下载的整个设备文件夹内的文件 **除去xxx Screen.zip** 全选后压缩为zip文件，**压缩后的文件名应为对应文件夹名，打开后根目录就是各xml文件**，随后放入 `Devices` 文件夹中。
 
-如有为屏幕的设备，将文件夹中的 **xxx Screen.zip** 放入 `Skins` 文件夹中。
+如有带屏幕显示的设备，将文件夹中的 **xxx Screen.zip** 放入 `Skins` 文件夹中。
 
 打开VirtualDJ即可使用。
 
