@@ -13,10 +13,15 @@
 **③ 放置文件**
 
 根据你使用的 VirtualDJ 版本，找到对应的数据目录
+
 2023之前的版本，通常在  C:\Users\用户名\Documents\VirtualDJ
+
 2023之后的版本，通常在  C:\Users\用户名\AppData\Local\VirtualDJ
+
 将下载的整个设备文件夹内的文件 **除去xxx Screen.zip** 全选后压缩为zip文件，**压缩后的文件名应为对应文件夹名，打开后根目录就是各xml文件**，随后放入 `Devices` 文件夹中。
+
 如有为屏幕的设备，将文件夹中的 **xxx Screen.zip** 放入 `Skins` 文件夹中。
+
 打开VirtualDJ即可使用。
 
 ## 📁 文件夹结构示例
