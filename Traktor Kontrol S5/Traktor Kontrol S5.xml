@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device name="TRAKTORS5" brand="Native Instruments" type="HID" macbyteoffset="0x01" category="3" description="Traktor Kontrol S5" screentype="12" skinAddonId="81890" controllerskin="Traktor Kontrol S5 Screens" skinName="Traktor Kontrol S5 Screens.zip" decks="4" analogmixer="no" linein="yes" padColumns="4" padRows="2" padSides="2" vid="0x17CC" pid="0x1420" reportsize="96" outreportsize="104" author="Atomix Productions" version="850" eq="soft" >
+<audio description="Traktor Kontrol S5" input="2" output="2" mixer="yes" vid="0x17CC" pid="0x1420" identifier="#nikst4_audio#" asio="Traktor Kontrol S5" inputChannels="1,2"/>
+<pads defaults="hotcues,loop roll,sampler,stems+fx,keycue,slicer,beatjump,stems"/>
+<settings>
+	<ShiftTouchStrip values="Scratch,Seek" tooltip="Select the behavior of the Touchstrip when SHIFT is held down" default="Seek"/>
+	<BrowserKeyField values="Value,Difference" tooltip="Select if the Key value or the Key Difference will be displayed in Browser view of S5" default="Value"/>
+</settings>
+<!-- TODO  
+Further investigate AUX and MIC 
+In Traktor MIC works while AUX is down (while pressed)
+Left LOOP = Mic Volume - Show Level on Touchstrip leds.
+Bug : Keys not appearing in Key List when inside a group with condition 
+	<group condition="DNC_SETTINGS">
+-->
+
+<!-- DJ Application Connected -->
+<page type="init" pagesize="11" pagetype="feature">
+	<constant byte="-1" buffer="F8E0011001056000503200"/>
+</page>
+<!-- Init Device - Set AUX to Off -->
+<page type="init" pagesize="33" pagetype="feature">
+	<constant byte="-1" buffer="F42800000000000000000000000000000000000000000000000000000000000000"/>
+</page>
+
+
+
+<!-- Page 01 - Len 30  Left-Right Deck buttons  -->
+<page type="in" >
+	<constant byte="-1" value="0x01" />
+	<button bit="0x39" name="SCR_LEFT_1" deck="left" />
+	<button bit="0x63" name="SCR_LEFT_1" deck="right" />	
+	
+		<encoder bit="0x00" nbbits="4" min="0x00" max="0x0F" name="LOOP_ENC_ROT" deck="left"/>
+		<encoder bit="0x04" nbbits="4" min="0x00" max="0x0F" name="BROWSE_ENC_ROT" deck="left" />
+		<encoder bit="0x08" nbbits="4" min="0x00" max="0x0F" name="LOOP_ENC_ROT" deck="right"/>
+		<encoder bit="0x0C" nbbits="4" min="0x00" max="0x0F" name="BROWSE_ENC_ROT" deck="right" />
+		<encoder bit="0x14" nbbits="4" min="0x00" max="0x0F" name="TEMPO_ENC_ROT" />
+		<button bit="0x18" name="FX_SL_1_TOUCH" deck="right" />
+		<button bit="0x19" name="FX_SL_2_TOUCH" deck="right" />
+		<button bit="0x1A" name="FX_SL_3_TOUCH" deck="right" />
+		<button bit="0x1B" name="FX_SL_4_TOUCH" deck="right" />
+		<button bit="0x1C" name="FX_SL_1_TOUCH" deck="left" />
+		<button bit="0x1D" name="FX_SL_2_TOUCH" deck="left" />
+		<button bit="0x1E" name="FX_SL_3_TOUCH" deck="left" />
+		<button bit="0x1F" name="FX_SL_4_TOUCH" deck="left" />
+		<button bit="0x20" name="QUANTIZE" />
+		
+		<button bit="0x24" name="FX_ASSIGN_1" deck="3" mixerorder="yes" />
+		<button bit="0x25" name="FX_ASSIGN_2" deck="3" mixerorder="yes" />
+		<button bit="0x26" name="FX_ASSIGN_1" deck="1" mixerorder="yes" />
+		<button bit="0x21" name="FX_ASSIGN_2" deck="1" mixerorder="yes" />
+		<button bit="0x22" name="FILTER_ACTIVATE" deck="3" mixerorder="yes" />
+		<button bit="0x23" name="PFL" deck="3" mixerorder="yes" />
+		
+		<button bit="0x27" name="SNAP" />
+		
+		<button bit="0x2A" name="FX_ON_2" deck="left" />
+		<button bit="0x2B" name="FX_ON_4" deck="left" />
+		<button bit="0x2C" name="FX_ON_3" deck="left" />
+		<button bit="0x2D" name="FX_ON_1" deck="left" />
+		<button bit="0x2E" name="FILTER_ACTIVATE" deck="1" mixerorder="yes" />
+		<button bit="0x2F" name="PFL" deck="1" mixerorder="yes" />
+		<button bit="0x30" name="DECK_SW" deck="left" />
+		<button bit="0x31" name="LOOP_ENC_PUSH" deck="left" />
+		<button bit="0x32" name="SCR_RIGHT_3" deck="left" />
+		<button bit="0x33" name="SCR_RIGHT_1" deck="left" />
+		<button bit="0x34" name="SCR_RIGHT_2" deck="left" />
+		<button bit="0x35" name="SCR_RIGHT_4" deck="left" />
+		<button bit="0x36" name="BROWSE_ENC_PUSH" deck="left" />
+		<button bit="0x37" name="BACK" deck="left" />
+		<button bit="0x38" name="SCR_LEFT_3" deck="left" />
+		<button bit="0x3E" name="SCR_LEFT_2" deck="left" />
+		<button bit="0x3F" name="SCR_LEFT_4" deck="left" />
+		<button bit="0x40" name="PAD_7" deck="left" />
+		<button bit="0x41" name="PAD_5" deck="left" />
+		<button bit="0x42" name="CUE" deck="left" />
+		<button bit="0x43" name="SHIFT" deck="left" />
+		<button bit="0x44" name="SYNC" deck="left" />
+		<button bit="0x45" name="PLAY" deck="left" />
+		<button bit="0x46" name="PAD_6" deck="left" />
+		<button bit="0x47" name="PAD_8" deck="left" />
+		<button bit="0x48" name="PADMODE_REMIX" deck="left" />
+		<button bit="0x49" name="PADMODE_HOTCUE" deck="left" />
+		<button bit="0x4A" name="PAD_3" deck="left" />
+		<button bit="0x4B" name="PAD_1" deck="left" />
+		<button bit="0x4C" name="PAD_2" deck="left" />
+		<button bit="0x4D" name="PAD_4" deck="left" />
+		<button bit="0x4E" name="PADMODE_FREEZE" deck="left" />
+		<button bit="0x4F" name="PADMODE_FLUX" deck="left" />
+		<button bit="0x50" name="TEMPO_ENC_PUSH" />
+		<button bit="0x51" name="FILTER_ACTIVATE" deck="4" mixerorder="yes" />
+		<button bit="0x52" name="PFL" deck="2" mixerorder="yes" />
+		<button bit="0x53" name="PFL" deck="4" mixerorder="yes" />
+		<button bit="0x54" name="AUX_ACTIVATE"  />
+		<button bit="0x55" name="FILTER_ACTIVATE" deck="2" mixerorder="yes" />
+		
+		<button bit="0x5A" name="PLAY" deck="right" />
+		<button bit="0x5B" name="SHIFT" deck="right" />
+		<button bit="0x5D" name="CUE" deck="right" />
+		<button bit="0x5E" name="SYNC" deck="right" />
+		<toggle bit="0x54" name="DNC_AUX_TOGGLE"  />
+		<button bit="0x60" name="SCR_LEFT_4" deck="right" />
+		<button bit="0x61" name="SCR_LEFT_3" deck="right" />
+		<button bit="0x62" name="SCR_LEFT_2" deck="right" />
+		<button bit="0x64" name="FX_ASSIGN_2" deck="4" mixerorder="yes" />
+		<button bit="0x65" name="FX_ASSIGN_1" deck="4" mixerorder="yes" />
+		<button bit="0x66" name="FX_ASSIGN_2" deck="2" mixerorder="yes" />
+		<button bit="0x67" name="FX_ASSIGN_1" deck="2" mixerorder="yes" />
+		
+		<button bit="0x68" name="LOOP_ENC_TOUCH" deck="right" />
+		<button bit="0x69" name="BROWSE_ENC_TOUCH" deck="right" />
+		<button bit="0x6A" name="LOOP_ENC_TOUCH" deck="left" />
+		<button bit="0x6B" name="BROWSE_ENC_TOUCH" deck="left" />
+		<button bit="0x6C" name="FX_ON_4" deck="right" />
+		<button bit="0x6D" name="FX_ON_3" deck="right" />
+		<button bit="0x6E" name="FX_ON_2" deck="right" />
+		<button bit="0x6F" name="FX_ON_1" deck="right" />
+		
+		
+		<button bit="0x74" name="LOOP_ENC_PUSH" deck="right" />
+		<button bit="0x75" name="DECK_SW" deck="right" />
+		<button bit="0x76" name="BACK" deck="right" />
+		<button bit="0x77" name="BROWSE_ENC_PUSH" deck="right" />
+		<button bit="0x78" name="PADMODE_REMIX" deck="right" />
+		<button bit="0x79" name="PAD_7" deck="right" />
+		<button bit="0x7A" name="PAD_2" deck="right" />
+		<button bit="0x7B" name="PAD_5" deck="right" />
+		<button bit="0x7C" name="PAD_1" deck="right" />
+		<button bit="0x7D" name="PAD_6" deck="right" />
+		<button bit="0x7E" name="PAD_3" deck="right" />
+		<button bit="0x7F" name="PADMODE_FLUX" deck="right" />
+		<button bit="0x80" name="PADMODE_FREEZE" deck="right" />
+		<button bit="0x81" name="SCR_RIGHT_3" deck="right" />
+		<button bit="0x82" name="SCR_RIGHT_1" deck="right" />
+		<button bit="0x83" name="PAD_4" deck="right" />
+		<button bit="0x84" name="PAD_8" deck="right" />
+		<button bit="0x85" name="SCR_RIGHT_2" deck="right" />
+		<button bit="0x86" name="SCR_RIGHT_4" deck="right" />
+		<button bit="0x87" name="PADMODE_HOTCUE" deck="right" />
+		
+		<slider bit="0x98" size="word" min="0x00" max="0x3FC" endian="little" relativetouchslider="yes" name="TOUCHJOG" deck="left"/>
+		<slider bit="0x98" size="word" min="0x00" max="0x3FC" endian="little" ignoretouchrelease="true" name="TOUCHSTRIP" deck="left"/>
+		<slider bit="0xC8" size="word" min="0x00" max="0x3FC" endian="little" relativetouchslider="yes" name="TOUCHJOG" deck="right"/>
+		<slider bit="0xC8" size="word" min="0x00" max="0x3FC" endian="little" ignoretouchrelease="true" name="TOUCHSTRIP" deck="right"/>
+
+	
+</page>
+
+<!-- Page 02 - Len 79 - Mixer, FX sliders -->
+<page type="in">
+	<constant byte="-1" value="0x02" />
+	<slider word="0x00" endian="little" min="0x00" max="0xFF0" name="VOLUME" deck="1" mixerorder="yes" />
+	<slider word="0x01" endian="little" min="0x00" max="0xFF0" name="VOLUME" deck="2" mixerorder="yes" />
+	<slider word="0x02" endian="little" min="0x00" max="0xFF0" name="VOLUME" deck="3" mixerorder="yes" />
+	<slider word="0x03" endian="little" min="0x00" max="0xFF0" name="VOLUME" deck="4" mixerorder="yes" />
+	<slider word="0x04" endian="little" min="0x00" max="0xFF0" name="CROSSFADER" />
+	<slider word="0x05" endian="little" min="0x00" max="0xFF0" name="MASTER_VOLUME" />
+	<slider word="0x06" endian="little" min="0x00" max="0xFF0" name="BOOTH_VOLUME" />
+	<slider word="0x07" endian="little" min="0x00" max="0xFF0" name="CUE_MIX" />
+	<slider word="0x08" endian="little" min="0x00" max="0xFF0" name="CUE_VOLUME" />
+		
+	<slider word="0x09" endian="little" min="0x00" max="0xFF0" name="GAIN" deck="1" mixerorder="yes" />
+	<slider word="0x0A" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_HI" deck="1" mixerorder="yes" />
+	<slider word="0x0B" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_MID" deck="1" mixerorder="yes" />
+	<slider word="0x0C" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_LOW" deck="1" mixerorder="yes" />
+	<slider word="0x0D" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FILTER" deck="1" mixerorder="yes" />
+
+	<slider word="0x0E" endian="little" min="0x00" max="0xFF0" name="GAIN" deck="2" mixerorder="yes" />
+	<slider word="0x0F" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_HI" deck="2" mixerorder="yes" />
+	<slider word="0x10" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_MID" deck="2" mixerorder="yes" />
+	<slider word="0x11" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_LOW" deck="2" mixerorder="yes" />
+	<slider word="0x12" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FILTER" deck="2" mixerorder="yes" />
+
+	<slider word="0x13" endian="little" min="0x00" max="0xFF0" name="GAIN" deck="3" mixerorder="yes" />
+	<slider word="0x14" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_HI" deck="3" mixerorder="yes" />
+	<slider word="0x15" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_MID" deck="3" mixerorder="yes" />
+	<slider word="0x16" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_LOW" deck="3" mixerorder="yes" />
+	<slider word="0x17" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FILTER" deck="3" mixerorder="yes" />
+	
+	<slider word="0x18" endian="little" min="0x00" max="0xFF0" name="GAIN" deck="4" mixerorder="yes" />
+	<slider word="0x19" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_HI" deck="4" mixerorder="yes" />
+	<slider word="0x1A" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_MID" deck="4" mixerorder="yes" />
+	<slider word="0x1B" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="EQ_LOW" deck="4" mixerorder="yes" />
+	<slider word="0x1C" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FILTER" deck="4" mixerorder="yes" />
+	
+	<slider word="0x1D" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_1" deck="left" />
+	<slider word="0x1E" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_2" deck="left" />
+	<slider word="0x1F" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_3" deck="left" />
+	<slider word="0x20" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_4" deck="left" />
+	<slider word="0x21" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_1" deck="right" />
+	<slider word="0x22" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_2" deck="right" />
+	<slider word="0x23" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_3" deck="right" />
+	<slider word="0x24" endian="little" min="0x00" max="0xFF0" zerorange="0xF0" name="FX_SL_4" deck="right" />
+	<slider word="0x25" endian="little" min="0x00" max="0xFF0"  name="AUX_LEFT_VOL" />
+	<slider word="0x26" endian="little" min="0x00" max="0xFF0"  name="AUX_RIGHT_VOL"/>
+</page>
+
+
+<page type="out" > <!-- Page 80 - Left Deck leds -->
+	<constant byte="-1" value="0x80" />
+		<color byte="0x00" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_1" default="PAD_1" deck="left" />
+		<color byte="0x03" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_2" default="PAD_2" deck="left" />
+		<color byte="0x06" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_3" default="PAD_3" deck="left" />
+		<color byte="0x09" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_4" default="PAD_4" deck="left" />
+		<color byte="0x0C" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_5" default="PAD_5" deck="left" />
+		<color byte="0x0F" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_6" default="PAD_6" deck="left" />
+		<color byte="0x12" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_7" default="PAD_7" deck="left" />
+		<color byte="0x15" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_8" default="PAD_8" deck="left" />
+		<led byte="0x18" zero="0x14" value="0x7F" name="LED_FX_ON_1" default="FX_ON_1" deck="left" />
+		<led byte="0x19" zero="0x14" value="0x7F" name="LED_FX_ON_2" default="FX_ON_2" deck="left" />
+		<led byte="0x1A" zero="0x14" value="0x7F" name="LED_FX_ON_3" default="FX_ON_3" deck="left" />
+		<led byte="0x1B" zero="0x14" value="0x7F" name="LED_FX_ON_4" default="FX_ON_4" deck="left" />
+		<led byte="0x1C" zero="0x14" value="0x7F" name="LED_SCR_LEFT_1" default="SCR_LEFT_1" deck="left" />
+		<led byte="0x1D" zero="0x14" value="0x7F" name="LED_SCR_LEFT_2" default="SCR_LEFT_2" deck="left" />
+		<led byte="0x1E" zero="0x14" value="0x7F" name="LED_SCR_LEFT_3" default="SCR_LEFT_3" deck="left" />
+		<led byte="0x1F" zero="0x14" value="0x7F" name="LED_SCR_LEFT_4" default="SCR_LEFT_4" deck="left" />
+		<led byte="0x20" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_1" default="SCR_RIGHT_1" deck="left" />
+		<led byte="0x21" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_2" default="SCR_RIGHT_2" deck="left" />
+		<led byte="0x22" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_3" default="SCR_RIGHT_3" deck="left" />
+		<led byte="0x23" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_4" default="SCR_RIGHT_4" deck="left" />
+		<bar byte="0x24" min="0x00" max="0x7F" name="LED_BACK_W_L" deck="left" />
+		<bar byte="0x25" min="0x00" max="0x7F" name="LED_BACK_B_L" deck="left" />
+		<led byte="0x26" zero="0x00" value="0x7F" name="LED_DECK_SW_W_L" deck="left" />
+		<led byte="0x27" zero="0x00" value="0x7F" name="LED_DECK_SW_B_L" deck="left" />
+		<bar byte="0x28" min="0x00" max="0x7F" name="LED_LOOP_ENC_W_L" deck="left" />
+		<bar byte="0x29" min="0x00" max="0x7F" name="LED_LOOP_ENC_B_L" deck="left" />
+		<bar byte="0x2A" min="0x00" max="0x7F" name="LED_PADMODE_HOTCUE_W_L" deck="left" />
+		<bar byte="0x2B" min="0x00" max="0x7F" name="LED_PADMODE_HOTCUE_B_L" deck="left" />
+		<bar byte="0x2C" min="0x00" max="0x7F" name="LED_PADMODE_FREEZE_W_L" deck="left" />
+		<bar byte="0x2D" min="0x00" max="0x7F" name="LED_PADMODE_FREEZE_B_L" deck="left" />
+		<bar byte="0x2E" min="0x00" max="0x7F" name="LED_PADMODE_REMIX_W_L" deck="left" />
+		<bar byte="0x2F" min="0x00" max="0x7F" name="LED_PADMODE_REMIX_B_L" deck="left" />
+		<bar byte="0x30" min="0x00" max="0x7F" name="LED_PADMODE_FLUX" deck="left" />
+		<led byte="0x31" zero="0x14" value="0x7F" name="LED_SHIFT" default="SHIFT" deck="left" />
+		<bar byte="0x32" min="0x00" max="0x7F" name="LED_SYNC_G" deck="left" />
+		<bar byte="0x33" min="0x00" max="0x7F" name="LED_SYNC_R" deck="left" />
+		<led byte="0x34" zero="0x14" value="0x7F" name="LED_CUE" default="CUE" deck="left" />
+		<led byte="0x35" zero="0x14" value="0x7F" name="LED_PLAY" default="PLAY" deck="left" />
+		<bar byte="0x36" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_01" deck="left" />
+		<bar byte="0x37" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_02" deck="left" />
+		<bar byte="0x38" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_03" deck="left" />
+		<bar byte="0x39" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_04" deck="left" />
+		<bar byte="0x3A" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_05" deck="left" />
+		<bar byte="0x3B" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_06" deck="left" />
+		<bar byte="0x3C" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_07" deck="left" />
+		<bar byte="0x3D" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_08" deck="left" />
+		<bar byte="0x3E" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_09" deck="left" />
+		<bar byte="0x3F" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_10" deck="left" />
+		<bar byte="0x40" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_11" deck="left" />
+		<bar byte="0x41" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_12" deck="left" />
+		<bar byte="0x42" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_13" deck="left" />
+		<bar byte="0x43" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_14" deck="left" />
+		<bar byte="0x44" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_15" deck="left" />
+		<bar byte="0x45" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_16" deck="left" />
+		<bar byte="0x46" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_17" deck="left" />
+		<bar byte="0x47" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_18" deck="left" />
+		<bar byte="0x48" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_19" deck="left" />
+		<bar byte="0x49" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_20" deck="left" />
+		<bar byte="0x4A" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_21" deck="left" />
+		<bar byte="0x4B" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_22" deck="left" />
+		<bar byte="0x4C" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_23" deck="left" />
+		<bar byte="0x4D" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_24" deck="left" />
+		<bar byte="0x4E" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_25" deck="left" />
+		<bar byte="0x4F" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_01" deck="left" />
+		<bar byte="0x50" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_02" deck="left" />
+		<bar byte="0x51" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_03" deck="left" />
+		<bar byte="0x52" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_04" deck="left" />
+		<bar byte="0x53" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_05" deck="left" />
+		<bar byte="0x54" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_06" deck="left" />
+		<bar byte="0x55" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_07" deck="left" />
+		<bar byte="0x56" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_08" deck="left" />
+		<bar byte="0x57" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_09" deck="left" />
+		<bar byte="0x58" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_10" deck="left" />
+		<bar byte="0x59" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_11" deck="left" />
+		<bar byte="0x5A" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_12" deck="left" />
+		<bar byte="0x5B" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_13" deck="left" />
+		<bar byte="0x5C" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_14" deck="left" />
+		<bar byte="0x5D" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_15" deck="left" />
+		<bar byte="0x5E" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_16" deck="left" />
+		<bar byte="0x5F" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_17" deck="left" />
+		<bar byte="0x60" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_18" deck="left" />
+		<bar byte="0x61" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_19" deck="left" />
+		<bar byte="0x62" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_20" deck="left" />
+		<bar byte="0x63" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_21" deck="left" />
+		<bar byte="0x64" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_22" deck="left" />
+		<bar byte="0x65" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_23" deck="left" />
+		<bar byte="0x66" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_24" deck="left" />
+		<bar byte="0x67" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_25" deck="left" />
+
+</page>
+
+<page type="out" > <!-- Page 81 - Right Deck leds Len 105 -->
+	<constant byte="-1" value="0x81" />
+		<color byte="0x00" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_1" default="PAD_1" deck="right" />
+		<color byte="0x03" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_2" default="PAD_2" deck="right" />
+		<color byte="0x06" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_3" default="PAD_3" deck="right" />
+		<color byte="0x09" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_4" default="PAD_4" deck="right" />
+		<color byte="0x0C" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_5" default="PAD_5" deck="right" />
+		<color byte="0x0F" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_6" default="PAD_6" deck="right" />
+		<color byte="0x12" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_7" default="PAD_7" deck="right" />
+		<color byte="0x15" nbbits="24" bitspercolor="7" colororder="rgb" name="LED_PAD_8" default="PAD_8" deck="right" />
+		<led byte="0x18" zero="0x14" value="0x7F" name="LED_FX_ON_1" default="FX_ON_1" deck="right" />
+		<led byte="0x19" zero="0x14" value="0x7F" name="LED_FX_ON_2" default="FX_ON_2" deck="right" />
+		<led byte="0x1A" zero="0x14" value="0x7F" name="LED_FX_ON_3" default="FX_ON_3" deck="right" />
+		<led byte="0x1B" zero="0x14" value="0x7F" name="LED_FX_ON_4" default="FX_ON_4" deck="right" />
+		<led byte="0x1C" zero="0x14" value="0x7F" name="LED_SCR_LEFT_1" default="SCR_LEFT_1" deck="right" />
+		<led byte="0x1D" zero="0x14" value="0x7F" name="LED_SCR_LEFT_2" default="SCR_LEFT_2" deck="right" />
+		<led byte="0x1E" zero="0x14" value="0x7F" name="LED_SCR_LEFT_3" default="SCR_LEFT_3" deck="right" />
+		<led byte="0x1F" zero="0x14" value="0x7F" name="LED_SCR_LEFT_4" default="SCR_LEFT_4" deck="right" />
+		<led byte="0x20" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_1" default="SCR_RIGHT_1" deck="right" />
+		<led byte="0x21" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_2" default="SCR_RIGHT_2" deck="right" />
+		<led byte="0x22" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_3" default="SCR_RIGHT_3" deck="right" />
+		<led byte="0x23" zero="0x14" value="0x7F" name="LED_SCR_RIGHT_4" default="SCR_RIGHT_4" deck="right" />
+		<bar byte="0x24" min="0x00" max="0x7F" name="LED_BACK_W_R" deck="right" />
+		<bar byte="0x25" min="0x00" max="0x7F" name="LED_BACK_B_R" deck="right" />
+		<led byte="0x26" zero="0x00" value="0x7F" name="LED_DECK_SW_W_R" deck="right" />
+		<led byte="0x27" zero="0x00" value="0x7F" name="LED_DECK_SW_B_R" deck="right" />
+		<bar byte="0x28" min="0x00" max="0x7F" name="LED_LOOP_ENC_W_R" deck="right" />
+		<bar byte="0x29" min="0x00" max="0x7F" name="LED_LOOP_ENC_B_R" deck="right" />
+		<bar byte="0x2A" min="0x00" max="0x7F" name="LED_PADMODE_HOTCUE_W_R" deck="right" />
+		<bar byte="0x2B" min="0x00" max="0x7F" name="LED_PADMODE_HOTCUE_B_R" deck="right" />
+		<bar byte="0x2C" min="0x00" max="0x7F" name="LED_PADMODE_FREEZE_W_R" deck="right" />
+		<bar byte="0x2D" min="0x00" max="0x7F" name="LED_PADMODE_FREEZE_B_R" deck="right" />
+		<bar byte="0x2E" min="0x00" max="0x7F" name="LED_PADMODE_REMIX_W_R" deck="right" />
+		<bar byte="0x2F" min="0x00" max="0x7F" name="LED_PADMODE_REMIX_B_R" deck="right" />
+		<bar byte="0x30" min="0x00" max="0x7F" name="LED_PADMODE_FLUX" deck="right" />
+		<led byte="0x31" zero="0x14" value="0x7F" name="LED_SHIFT" default="SHIFT" deck="right" />
+		<bar byte="0x32" min="0x00" max="0x7F" name="LED_SYNC_G" deck="right" />
+		<bar byte="0x33" min="0x00" max="0x7F" name="LED_SYNC_R" deck="right" />
+		<led byte="0x34" zero="0x14" value="0x7F" name="LED_CUE" default="CUE" deck="right" />
+		<led byte="0x35" zero="0x14" value="0x7F" name="LED_PLAY" default="PLAY" deck="right" />
+		<bar byte="0x36" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_01" deck="right" />
+		<bar byte="0x37" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_02" deck="right" />
+		<bar byte="0x38" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_03" deck="right" />
+		<bar byte="0x39" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_04" deck="right" />
+		<bar byte="0x3A" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_05" deck="right" />
+		<bar byte="0x3B" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_06" deck="right" />
+		<bar byte="0x3C" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_07" deck="right" />
+		<bar byte="0x3D" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_08" deck="right" />
+		<bar byte="0x3E" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_09" deck="right" />
+		<bar byte="0x3F" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_10" deck="right" />
+		<bar byte="0x40" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_11" deck="right" />
+		<bar byte="0x41" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_12" deck="right" />
+		<bar byte="0x42" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_13" deck="right" />
+		<bar byte="0x43" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_14" deck="right" />
+		<bar byte="0x44" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_15" deck="right" />
+		<bar byte="0x45" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_16" deck="right" />
+		<bar byte="0x46" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_17" deck="right" />
+		<bar byte="0x47" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_18" deck="right" />
+		<bar byte="0x48" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_19" deck="right" />
+		<bar byte="0x49" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_20" deck="right" />
+		<bar byte="0x4A" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_21" deck="right" />
+		<bar byte="0x4B" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_22" deck="right" />
+		<bar byte="0x4C" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_23" deck="right" />
+		<bar byte="0x4D" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_24" deck="right" />
+		<bar byte="0x4E" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_B_25" deck="right" />
+		<bar byte="0x4F" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_01" deck="right" />
+		<bar byte="0x50" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_02" deck="right" />
+		<bar byte="0x51" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_03" deck="right" />
+		<bar byte="0x52" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_04" deck="right" />
+		<bar byte="0x53" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_05" deck="right" />
+		<bar byte="0x54" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_06" deck="right" />
+		<bar byte="0x55" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_07" deck="right" />
+		<bar byte="0x56" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_08" deck="right" />
+		<bar byte="0x57" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_09" deck="right" />
+		<bar byte="0x58" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_10" deck="right" />
+		<bar byte="0x59" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_11" deck="right" />
+		<bar byte="0x5A" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_12" deck="right" />
+		<bar byte="0x5B" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_13" deck="right" />
+		<bar byte="0x5C" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_14" deck="right" />
+		<bar byte="0x5D" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_15" deck="right" />
+		<bar byte="0x5E" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_16" deck="right" />
+		<bar byte="0x5F" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_17" deck="right" />
+		<bar byte="0x60" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_18" deck="right" />
+		<bar byte="0x61" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_19" deck="right" />
+		<bar byte="0x62" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_20" deck="right" />
+		<bar byte="0x63" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_21" deck="right" />
+		<bar byte="0x64" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_22" deck="right" />
+		<bar byte="0x65" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_23" deck="right" />
+		<bar byte="0x66" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_24" deck="right" />
+		<bar byte="0x67" min="0x00" max="0x7F" name="LED_TOUCHSTRIP_A_25" deck="right" />
+
+</page>
+
+<page type="out" > <!-- Page 82 - Mixer leds -->
+	<constant byte="-1" value="0x82" />
+	<led byte="0x00" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="3" mixerorder="yes" />
+	<led byte="0x01" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="3" mixerorder="yes" />
+	<led byte="0x02" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="1" mixerorder="yes" />
+	<led byte="0x03" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="1" mixerorder="yes" />
+	<led byte="0x04" zero="0x14" value="0x7F" name="LED_SNAP" default="SNAP" />
+	<led byte="0x05" zero="0x14" value="0x7F" name="LED_QUANTIZE" default="QUANTIZE" />
+	<led byte="0x06" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="2" mixerorder="yes" />
+	<led byte="0x07" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="2" mixerorder="yes" />
+	<led byte="0x08" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_1" default="FX_ASSIGN_1" deck="4" mixerorder="yes" />
+	<led byte="0x09" zero="0x14" value="0x7F" name="LED_FX_ASSIGN_2" default="FX_ASSIGN_2" deck="4" mixerorder="yes" />
+	<led byte="0x0A" zero="0x14" value="0x7F" name="LED_FILTER_ACTIVATE" default="FILTER_ACTIVATE" deck="3" mixerorder="yes" />
+	<led byte="0x0B" zero="0x14" value="0x7F" name="LED_FILTER_ACTIVATE" default="FILTER_ACTIVATE" deck="1" mixerorder="yes" />
+	<led byte="0x0C" zero="0x14" value="0x7F" name="LED_FILTER_ACTIVATE" default="FILTER_ACTIVATE" deck="2" mixerorder="yes" />
+	<led byte="0x0D" zero="0x14" value="0x7F" name="LED_FILTER_ACTIVATE" default="FILTER_ACTIVATE" deck="4" mixerorder="yes" />
+	<led byte="0x0E" zero="0x14" value="0x7F" name="LED_PFL" default="PFL" deck="3" mixerorder="yes" />
+	<led byte="0x0F" zero="0x14" value="0x7F" name="LED_PFL" default="PFL" deck="1" mixerorder="yes" />
+	
+	<led byte="0x11" zero="0x14" value="0x7F" name="LED_PFL" default="PFL" deck="2" mixerorder="yes" />
+	<led byte="0x12" zero="0x14" value="0x7F" name="LED_PFL" default="PFL" deck="4" mixerorder="yes" />
+	<led byte="0x13" zero="0x00" value="0x7F" name="LED_VU_01" deck="3" mixerorder="yes" />
+	<led byte="0x14" zero="0x00" value="0x7F" name="LED_VU_02" deck="3" mixerorder="yes" />
+	<led byte="0x15" zero="0x00" value="0x7F" name="LED_VU_03" deck="3" mixerorder="yes" />
+	<led byte="0x16" zero="0x00" value="0x7F" name="LED_VU_04" deck="3" mixerorder="yes" />
+	<led byte="0x17" zero="0x00" value="0x7F" name="LED_VU_05" deck="3" mixerorder="yes" />
+	<led byte="0x18" zero="0x00" value="0x7F" name="LED_VU_06" deck="3" mixerorder="yes" />
+	<led byte="0x19" zero="0x00" value="0x7F" name="LED_VU_07" deck="3" mixerorder="yes" />
+	<led byte="0x1A" zero="0x00" value="0x7F" name="LED_VU_08" deck="3" mixerorder="yes" />
+	<led byte="0x1B" zero="0x00" value="0x7F" name="LED_VU_09" deck="3" mixerorder="yes" />
+	<led byte="0x1C" zero="0x00" value="0x7F" name="LED_VU_10" deck="3" mixerorder="yes" />
+	<led byte="0x1D" zero="0x00" value="0x7F" name="LED_VU_LIM" deck="3" mixerorder="yes" />
+	<led byte="0x1E" zero="0x00" value="0x7F" name="LED_VU_01" deck="1" mixerorder="yes" />
+	<led byte="0x1F" zero="0x00" value="0x7F" name="LED_VU_02" deck="1" mixerorder="yes" />
+	<led byte="0x20" zero="0x00" value="0x7F" name="LED_VU_03" deck="1" mixerorder="yes" />
+	<led byte="0x21" zero="0x00" value="0x7F" name="LED_VU_04" deck="1" mixerorder="yes" />
+	<led byte="0x22" zero="0x00" value="0x7F" name="LED_VU_05" deck="1" mixerorder="yes" />
+	<led byte="0x23" zero="0x00" value="0x7F" name="LED_VU_06" deck="1" mixerorder="yes" />
+	<led byte="0x24" zero="0x00" value="0x7F" name="LED_VU_07" deck="1" mixerorder="yes" />
+	<led byte="0x25" zero="0x00" value="0x7F" name="LED_VU_08" deck="1" mixerorder="yes" />
+	<led byte="0x26" zero="0x00" value="0x7F" name="LED_VU_09" deck="1" mixerorder="yes" />
+	<led byte="0x27" zero="0x00" value="0x7F" name="LED_VU_10" deck="1" mixerorder="yes" />
+	<led byte="0x28" zero="0x00" value="0x7F" name="LED_VU_LIM" deck="1" mixerorder="yes" />
+	<led byte="0x29" zero="0x00" value="0x7F" name="LED_VU_01" deck="2" mixerorder="yes" />
+	<led byte="0x2A" zero="0x00" value="0x7F" name="LED_VU_02" deck="2" mixerorder="yes" />
+	<led byte="0x2B" zero="0x00" value="0x7F" name="LED_VU_03" deck="2" mixerorder="yes" />
+	<led byte="0x2C" zero="0x00" value="0x7F" name="LED_VU_04" deck="2" mixerorder="yes" />
+	<led byte="0x2D" zero="0x00" value="0x7F" name="LED_VU_05" deck="2" mixerorder="yes" />
+	<led byte="0x2E" zero="0x00" value="0x7F" name="LED_VU_06" deck="2" mixerorder="yes" />
+	<led byte="0x2F" zero="0x00" value="0x7F" name="LED_VU_07" deck="2" mixerorder="yes" />
+	<led byte="0x30" zero="0x00" value="0x7F" name="LED_VU_08" deck="2" mixerorder="yes" />
+	<led byte="0x31" zero="0x00" value="0x7F" name="LED_VU_09" deck="2" mixerorder="yes" />
+	<led byte="0x32" zero="0x00" value="0x7F" name="LED_VU_10" deck="2" mixerorder="yes" />
+	<led byte="0x33" zero="0x00" value="0x7F" name="LED_VU_LIM" deck="2" mixerorder="yes" />
+	<led byte="0x34" zero="0x00" value="0x7F" name="LED_VU_01" deck="4" mixerorder="yes" />
+	<led byte="0x35" zero="0x00" value="0x7F" name="LED_VU_02" deck="4" mixerorder="yes" />
+	<led byte="0x36" zero="0x00" value="0x7F" name="LED_VU_03" deck="4" mixerorder="yes" />
+	<led byte="0x37" zero="0x00" value="0x7F" name="LED_VU_04" deck="4" mixerorder="yes" />
+	<led byte="0x38" zero="0x00" value="0x7F" name="LED_VU_05" deck="4" mixerorder="yes" />
+	<led byte="0x39" zero="0x00" value="0x7F" name="LED_VU_06" deck="4" mixerorder="yes" />
+	<led byte="0x3A" zero="0x00" value="0x7F" name="LED_VU_07" deck="4" mixerorder="yes" />
+	<led byte="0x3B" zero="0x00" value="0x7F" name="LED_VU_08" deck="4" mixerorder="yes" />
+	<led byte="0x3C" zero="0x00" value="0x7F" name="LED_VU_09" deck="4" mixerorder="yes" />
+	<led byte="0x3D" zero="0x00" value="0x7F" name="LED_VU_10" deck="4" mixerorder="yes" />
+	<led byte="0x3E" zero="0x00" value="0x7F" name="LED_VU_LIM" deck="4" mixerorder="yes" />
+
+	<!-- ends like...
+00 00 7F 00 00 00 00 00 00 00
+The 7F could be AUX On/off byte 0x41	-->
+
+	<!-- last byte -->
+	<constant byte="0x48" value="0x00" />
+</page>
+
+<!-- AUX ACTIVATE -->
+<page type="out" pagesize="33" pagetype="feature">
+	<constant byte="-1" value="0xF4"/>
+	<constant byte="0" value="0x28"/>
+	<led byte="0x01" zero="0x00" value="0x01" name="DNC_LED_AUX_ACTIVATE"/>
+</page>
+
+<!-- When S5 Settings is enabled, set leds to dim - Removed for now, till we fix the bug with hidden keys when inside a group with condition  
+<page type="out" >
+	<constant byte="-1" value="0x80" />
+	<group condition="DNC_SETTINGS_ON">
+		<led byte="0" zero="0x00" value="0x10" name="DNC_FAKE_VALUE"  />
+	</group>
+		<constant byte="1" buffer="0400100400100400100400100400100400100400100400141414147F00007F0000007F14007F007F001400140014001414140014140000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
+</page>
+<page type="out" >
+	<constant byte="-1" value="0x81" />
+	<group condition="DNC_SETTINGS_ON">
+		<led byte="0" zero="0x00" value="0x10" name="DNC_FAKE_VALUE"  />
+	</group>
+		<constant byte="1" buffer="0400100400100400100400100400100400100400100400141414147F00007F0000007F14007F007F001400140014001414140014140000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
+</page>
+-->
+
+
+<!-- Turn Off AUX on Exit -->
+<page type="exit" pagesize="33" pagetype="feature">
+	<constant byte="-1" buffer="F42800000000000000000000000000000000000000000000000000000000000000"/>
+</page>
+
+<!-- Turn Leds Off on Exit -->
+<page type="exit">
+	<constant byte="-1" value="0x80"/>
+	<constant byte="0x00" nbbits="832" value="0x00"/>
+</page>
+<page type="exit">
+	<constant byte="-1" value="0x81"/>
+	<constant byte="0x00" nbbits="832" value="0x00"/>
+</page>
+<page type="exit">
+	<constant byte="-1" value="0x82"/>
+	<constant byte="0x00" nbbits="584" value="0x00"/>
+</page>
+
+<!-- Release Device -->
+<page type="exit" pagesize="11" pagetype="feature">
+	<constant byte="-1" buffer="F8E0011001056000143200"/>
+</page>
+
+
+</device>
